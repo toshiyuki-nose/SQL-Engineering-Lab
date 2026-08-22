@@ -330,8 +330,4 @@ Future content may include
 - Backup & Recovery
 
 
----
 
-# Author
-
-Created as a personal learning project for mastering SQL and Database Engineering using Oracle Database Free.
