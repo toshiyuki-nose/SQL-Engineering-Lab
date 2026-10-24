@@ -56,7 +56,7 @@ Check the execution output and the final cleanup queries before proceeding to th
 
 ## Repository conventions
 
-Each lesson includes a Markdown explanation (`lesson.md`) and an executable SQL script (`lessonNN.sql`). SQL*Plus execution logs are stored locally in `logs/` and excluded from Git by `.gitignore`.
+Each lesson includes a Markdown explanation (`courseNN_lessonNN.md`) and an executable SQL script (`lessonNN.sql`). SQL*Plus execution logs are stored locally in `logs/` and excluded from Git by `.gitignore`.
 
 ## Completion criteria
 

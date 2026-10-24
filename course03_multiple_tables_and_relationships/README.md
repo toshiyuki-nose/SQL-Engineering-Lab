@@ -159,28 +159,28 @@ course03_multiple_tables_and_relationships/
 ├── README.md
 │
 ├── lesson01_relational_database_basics/
-│   ├── lesson.md
+│   ├── course03_lesson01.md
 │   └── lesson01.sql
 │
 ├── lesson02_creating_related_tables/
-│   ├── lesson.md
+│   ├── course03_lesson02.md
 │   ├── setup.sql
 │   └── lesson02.sql
 │
 ├── lesson03_inner_join/
-│   ├── lesson.md
+│   ├── course03_lesson03.md
 │   └── lesson03.sql
 │
 ├── lesson04_outer_join/
-│   ├── lesson.md
+│   ├── course03_lesson04.md
 │   └── lesson04.sql
 │
 ├── lesson05_multiple_table_joins/
-│   ├── lesson.md
+│   ├── course03_lesson05.md
 │   └── lesson05.sql
 │
 └── lesson06_subqueries/
-    ├── lesson.md
+    ├── course03_lesson06.md
     └── lesson06.sql
 ```
 

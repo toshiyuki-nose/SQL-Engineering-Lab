@@ -133,27 +133,27 @@ course02_sql_fundamentals/
 ├── README.md
 │
 ├── lesson01_select_basics/
-│   ├── lesson.md
+│   ├── course02_lesson01.md
 │   └── lesson01.sql
 │
 ├── lesson02_filtering_rows/
-│   ├── lesson.md
+│   ├── course02_lesson02.md
 │   └── lesson02.sql
 │
 ├── lesson03_sorting_results/
-│   ├── lesson.md
+│   ├── course02_lesson03.md
 │   └── lesson03.sql
 │
 ├── lesson04_expressions_and_null/
-│   ├── lesson.md
+│   ├── course02_lesson04.md
 │   └── lesson04.sql
 │
 ├── lesson05_sql_functions/
-│   ├── lesson.md
+│   ├── course02_lesson05.md
 │   └── lesson05.sql
 │
 └── lesson06_aggregation_and_grouping/
-    ├── lesson.md
+    ├── course02_lesson06.md
     └── lesson06.sql
 ```
 

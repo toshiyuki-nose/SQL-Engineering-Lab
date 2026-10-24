@@ -24,7 +24,7 @@ Build on the Book Store Database developed in Courses 01–04. This course focus
 
 ## Working Method
 
-1. Read each lesson's `lesson.md`.
+1. Read each lesson's `courseNN_lessonNN.md`.
 2. Execute `lessonNN.sql` in SQL*Plus.
 3. Review the generated `logs/lessonNN.log` file.
 4. Verify results and answer the practice questions.

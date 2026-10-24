@@ -358,7 +358,7 @@ Experiment in SQL Developer
 Validate the SQL
           │
           ▼
-Document the concepts in lesson.md
+Document the concepts in course01_lesson03.md
           │
           ▼
 Organize executable SQL in lessonXX.sql
@@ -386,7 +386,7 @@ For example:
 
 ```text
 lesson03_sql_clients/
-├── lesson.md
+├── course01_lesson03.md
 └── lesson03.sql
 ```
 
@@ -394,7 +394,7 @@ The roles are different:
 
 | File | Purpose |
 |------|---------|
-| `lesson.md` | Explain concepts, procedures, and expected results |
+| `course01_lesson03.md` | Explain concepts, procedures, and expected results |
 | `lesson03.sql` | Store executable and reproducible SQL |
 
 SQL Developer worksheets should be treated as temporary working areas rather than permanent project artifacts.
