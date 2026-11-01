@@ -2,17 +2,15 @@
 
 > **Learn SQL. Design Databases. Engineer Better Queries.**
 
-A comprehensive hands-on learning course for mastering SQL and Database Engineering using **Oracle Database Free**.
+A hands-on SQL and database engineering learning project built around **Oracle Database 23ai Free**.
 
 ---
 
 ## Overview
 
-**SQL-Engineering-Lab** is a structured learning repository designed to teach SQL through practical database engineering.
+**SQL-Engineering-Lab** is a structured learning repository for practicing SQL through real database exercises.
 
-Unlike traditional SQL tutorials that focus only on SQL syntax, this project emphasizes the complete workflow of designing, building, querying, and optimizing relational databases.
-
-Throughout this repository, you will learn not only how to write SQL, but also how Oracle executes queries internally, how relational databases should be designed, and how SQL can be improved through engineering practices.
+Rather than focusing on syntax alone, the project emphasizes writing, executing, verifying, and improving SQL in an Oracle environment. As the curriculum progresses, it will also cover database design, execution plans, and performance tuning.
 
 The goal is simple:
 
@@ -20,314 +18,181 @@ The goal is simple:
 
 ---
 
-# What You Will Learn
+## Learning Progress
 
-This repository covers the following topics.
+**Courses 01–05 are complete: 29 lessons in total.**
 
-- Oracle Database Free
-- SQL Fundamentals
-- Relational Database Design
-- Data Manipulation
-- Aggregate Queries
-- Joins
-- Subqueries
-- Set-Oriented Thinking
-- Window Functions
-- Constraints
-- Indexes
-- Views
-- Sequences
-- Execution Plans
-- Oracle Optimizer
-- SQL Performance Tuning
-- Database Engineering Best Practices
+| Course | Subject | Lessons | Status |
+|---|---|---:|---|
+| [01](course01_oracle_environment/) | Oracle Environment | 5 | Complete |
+| [02](course02_sql_fundamentals/) | SQL Fundamentals | 6 | Complete |
+| [03](course03_multiple_tables_and_relationships/) | Multiple Tables and Relationships | 6 | Complete |
+| [04](course04_data_manipulation_and_transactions/) | Data Manipulation and Transactions | 6 | Complete |
+| [05](course05_advanced_sql_queries/) | Advanced SQL Queries | 6 | Complete |
+| 06 | Next course — scope to be defined | — | Planned |
+
+The curriculum will continue to grow as new courses are designed and verified.
 
 ---
 
-# Learning Journey
+## Completed Curriculum
 
-The repository is organized into a series of structured learning courses.
+### Course 01 — Oracle Environment
 
-Each course builds upon the previous one.
+Establish an Oracle learning environment and understand its core components.
 
-```
-Oracle Environment
-        │
-        ▼
-SQL Fundamentals
-        │
-        ▼
-Relational Queries
-        │
-        ▼
-Advanced SQL
-        │
-        ▼
-Database Design
-        │
-        ▼
-Oracle Database Engineering
-        │
-        ▼
-Performance Tuning
-        │
-        ▼
-Final Project
-```
+- Oracle Database overview
+- Connecting to FREEPDB1
+- SQL clients
+- Users, schemas, and tablespaces
+- First database objects
 
-By the end of the journey, you will have built a complete relational database application while learning the engineering principles behind SQL.
+[Explore Course 01](course01_oracle_environment/)
 
----
+### Course 02 — SQL Fundamentals
 
-# Course Curriculum
+Build a foundation in querying and analyzing relational data.
 
-## Course 1 — Oracle Environment
+- SELECT basics
+- Filtering rows
+- Sorting results
+- Expressions and NULL
+- SQL functions
+- Aggregation and grouping
 
-Build your Oracle development environment.
+[Explore Course 02](course02_sql_fundamentals/)
 
-Topics include
+### Course 03 — Multiple Tables and Relationships
 
-- Oracle Database Free
-- SQL Developer
-- SQL*Plus
-- Users
-- Schemas
-- Tablespaces
-- Creating Tables
-- Sample Data
+Understand relationships and retrieve information across tables.
 
----
-
-## Course 2 — SQL Fundamentals
-
-Learn the SQL language from the ground up.
-
-Topics include
-
-- SELECT
-- WHERE
-- ORDER BY
-- DISTINCT
-- NULL
-- Built-in Functions
-- INSERT
-- UPDATE
-- DELETE
-
----
-
-## Course 3 — Querying Relational Data
-
-Learn how to work with multiple tables.
-
-Topics include
-
-- Aggregate Functions
-- GROUP BY
-- HAVING
+- Relational database basics
+- Creating related tables
 - INNER JOIN
 - OUTER JOIN
-- SELF JOIN
-- CROSS JOIN
-- UNION
-- EXISTS
+- Multiple-table joins
 - Subqueries
 
----
+[Explore Course 03](course03_multiple_tables_and_relationships/)
 
-## Course 4 — Advanced SQL
+### Course 04 — Data Manipulation and Transactions
 
-Develop a deeper understanding of SQL.
+Learn how to modify data while protecting consistency and integrity.
 
-Topics include
+- INSERT statements
+- UPDATE statements
+- DELETE statements
+- MERGE and upsert
+- Transactions, COMMIT, and ROLLBACK
+- Data integrity and safe DML practices
 
-- CASE Expressions
-- Window Functions
-- Common Table Expressions (CTE)
-- Recursive Queries
-- Set-Oriented Thinking
-- Query Refactoring
+[Explore Course 04](course04_data_manipulation_and_transactions/)
 
----
+### Course 05 — Advanced SQL Queries
 
-## Course 5 — Database Design
+Develop more expressive, maintainable SQL queries.
 
-Learn how relational databases are designed.
+- CASE expressions
+- Common Table Expressions (CTEs)
+- Set operations
+- Window function basics
+- Advanced window functions
+- Query refactoring
 
-Topics include
-
-- Normalization
-- ER Modeling
-- Primary Keys
-- Foreign Keys
-- Constraints
-- Views
-- Sequences
-- Indexes
+[Explore Course 05](course05_advanced_sql_queries/)
 
 ---
 
-## Course 6 — Oracle Database Engineering
+## Learning Environment
 
-Understand how Oracle executes SQL.
+| Component | Configuration |
+|---|---|
+| Database | Oracle Database 23ai Free |
+| Container Database | FREE |
+| Pluggable Database | FREEPDB1 |
+| Learning Schema | SQL_LAB |
+| Command-line Client | SQL*Plus |
+| GUI Client | Oracle SQL Developer |
 
-Topics include
+The **SQL_LAB** schema contains the Book Store Database used in the exercises, alongside additional learning tables.
 
-- Execution Plans
-- AUTOTRACE
-- Oracle Optimizer
-- Optimizer Statistics
-- SQL Tuning
-- Index Strategy
-- Query Performance
+The Book Store Database includes four related tables:
 
----
+- **CATEGORIES** — book categories
+- **BOOKS** — book records
+- **AUTHORS** — author records
+- **BOOK_AUTHORS** — relationships between books and authors
 
-## Course 7 — Final Project
-
-Apply everything you've learned.
-
-The final project includes
-
-- Database Design
-- Table Definitions
-- Sample Data
-- Business Queries
-- Reporting Queries
-- Performance Analysis
-- SQL Optimization
-- Documentation
+For the verified schema inventory, tables, constraints, indexes, and environment checks, see [Oracle Environment](docs/oracle_environment.md).
 
 ---
 
-# Learning Workflow
+## Repository Structure
 
-Every lesson follows the same engineering workflow.
+The following tree highlights the established course directories and the environment documentation. It is not an exhaustive listing of every file.
 
-```
-Learn
-
-        ↓
-
-Write SQL
-
-        ↓
-
-Execute on Oracle
-
-        ↓
-
-Verify Results
-
-        ↓
-
-Analyze Execution Plan
-
-        ↓
-
-Compare Alternatives
-
-        ↓
-
-Improve SQL
-```
-
-This approach focuses on understanding **why** a query works, not simply memorizing SQL syntax.
-
----
-
-# Repository Structure
-
-```
+```text
 SQL-Engineering-Lab/
-│
 ├── README.md
-│
+├── .gitattributes
 ├── course01_oracle_environment/
-│
 ├── course02_sql_fundamentals/
-│
-├── course03_relational_queries/
-│
-├── course04_advanced_sql/
-│
-├── course05_database_design/
-│
-├── course06_oracle_engineering/
-│
-├── course07_final_project/
-│
-├── docs/
-│
-├── data/
-│
-├── images/
-│
-└── scripts/
+├── course03_multiple_tables_and_relationships/
+├── course04_data_manipulation_and_transactions/
+├── course05_advanced_sql_queries/
+└── docs/
+    └── oracle_environment.md
 ```
 
-Each course contains multiple lessons, examples, exercises, engineering notes, and Oracle-specific demonstrations.
+Each completed course contains lesson materials and supporting SQL exercises. Lesson documentation follows the naming convention `courseNN_lessonNN.md`.
 
 ---
 
-# Sample Database
+## Learning Workflow
 
-The entire repository uses a single sample database.
+The exercises emphasize a repeatable, hands-on process:
 
-Instead of changing datasets between lessons, the database gradually evolves as new concepts are introduced.
+1. Read the lesson and understand the objective.
+2. Write or review the SQL statements.
+3. Execute the SQL in Oracle Database.
+4. Inspect the results and verify the expected behavior.
+5. Compare alternative approaches where appropriate.
+6. Complete the exercises and review the engineering notes.
 
-This allows you to experience how a real-world relational database grows over time.
-
-The same database is used throughout all courses—from basic SQL queries to performance tuning and final project implementation.
-
----
-
-# Recommended Learning Style
-
-For each lesson:
-
-1. Read the explanation.
-2. Execute every SQL statement.
-3. Verify the results.
-4. Read the execution plan.
-5. Compare different SQL approaches.
-6. Complete the exercises.
-7. Review the engineering notes.
-
-Learning SQL by writing SQL is important.
-
-Learning **why Oracle executes SQL the way it does** is even more important.
+As later courses introduce performance engineering, this workflow will expand to include execution-plan analysis and SQL tuning.
 
 ---
 
-# References
+## Future Roadmap
 
-This repository is inspired by several excellent SQL books and Oracle documentation.
+Potential future topics include:
 
-The SQL scripts, explanations, exercises, database designs, and engineering notes are independently written for Oracle Database Free.
+- Relational database design and normalization
+- Views, sequences, and indexes
+- Execution plans and AUTOTRACE
+- Oracle Optimizer and optimizer statistics
+- SQL performance tuning
+- PL/SQL, procedures, functions, packages, and triggers
+- Materialized views and partitioning
+- Database security and operations
+- An end-to-end database engineering project
+
+These topics are **planned possibilities**, not completed course content. Course 06 and subsequent course structures will be defined as the project progresses.
+
+---
+
+## References
+
+This repository draws inspiration from SQL learning resources and Oracle documentation. Its lesson materials, examples, exercises, and engineering notes are developed for the Oracle learning environment.
 
 Recommended references:
 
-- Learn SQL in 24 Hours: The Complete Beginner's Guide
-- SQL実践入門
-- Oracle Database Documentation
+- *Learn SQL in 24 Hours: The Complete Beginner's Guide*
+- *SQL実践入門*
+- [Oracle Database Documentation](https://docs.oracle.com/en/database/)
 
 ---
 
-# Future Roadmap
+## Project Principle
 
-Future content may include
-
-- PL/SQL
-- Stored Procedures
-- Functions
-- Packages
-- Triggers
-- Materialized Views
-- Partitioning
-- Oracle Scheduler
-- Security
-- Backup & Recovery
-
-
-
+**Learn by executing. Verify what happens. Understand why it works.**
