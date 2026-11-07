@@ -7,7 +7,7 @@ Lesson 06 - Subqueries
 
 File
 ----
-lesson06.sql
+course03_lesson06.sql
 
 Purpose
 -------

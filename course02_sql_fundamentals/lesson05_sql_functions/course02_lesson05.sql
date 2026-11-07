@@ -3,15 +3,15 @@
 SQL-Engineering-Lab
 
 Course 02 - SQL Fundamentals
-Lesson 04 - Expressions and NULL
+Lesson 05 - SQL Functions
 
 File
 ----
-lesson04.sql
+course02_lesson05.sql
 
 Purpose
 -------
-Practice SQL expressions and learn how SQL handles NULL values.
+Practice character, numeric, and NULL-handling SQL functions.
 
 Execute as:
 
@@ -19,19 +19,20 @@ Execute as:
 
 Prerequisite
 ------------
-Complete Lesson 03 and run the Lesson 04 setup.sql once.
+Complete Lesson 04.
 
 Topics
 ------
-1. Arithmetic expressions
-2. Expressions with columns
-3. Column aliases
-4. Character concatenation
-5. NULL
-6. IS NULL
-7. IS NOT NULL
-8. NULL in expressions
-9. WHERE + expressions + ORDER BY
+1. UPPER
+2. LOWER
+3. LENGTH
+4. SUBSTR
+5. ROUND
+6. TRUNC
+7. NVL
+8. COALESCE
+9. Nested functions
+10. Functions with WHERE and ORDER BY
 
 ==============================================================================
 */
@@ -39,8 +40,8 @@ Topics
 PROMPT
 PROMPT ============================================================
 PROMPT SQL-Engineering-Lab
-PROMPT Course 02 - Lesson 04
-PROMPT Expressions and NULL
+PROMPT Course 02 - Lesson 05
+PROMPT SQL Functions
 PROMPT ============================================================
 PROMPT
 
@@ -50,11 +51,17 @@ SET LINESIZE 180
 SET PAGESIZE 100
 
 COLUMN TITLE FORMAT A30
+COLUMN UPPER_TITLE FORMAT A30
+COLUMN LOWER_TITLE FORMAT A30
+COLUMN SHORT_TITLE FORMAT A15
 COLUMN SUBTITLE FORMAT A50
+COLUMN DISPLAY_SUBTITLE FORMAT A50
+COLUMN DISPLAY_NAME FORMAT A50
 COLUMN CATEGORY FORMAT A15
 COLUMN PRICE FORMAT 999999.99
 COLUMN INVENTORY_VALUE FORMAT 99999999.99
-COLUMN BOOK_DESCRIPTION FORMAT A60
+COLUMN ROUNDED_VALUE FORMAT 999999.99
+COLUMN TRUNCATED_VALUE FORMAT 999999.99
 
 -------------------------------------------------------------------------------
 -- Step 1
@@ -76,243 +83,219 @@ FROM dual;
 
 -------------------------------------------------------------------------------
 -- Step 2
--- Inspect the evolved BOOKS table
+-- Verify the prerequisite
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 2: Inspect BOOKS ===
+PROMPT === Step 2: Verify BOOKS ===
 PROMPT
 
+SELECT COUNT(*) AS book_count
+FROM books;
+
 SELECT
-    book_id,
-    title,
-    subtitle,
-    category,
-    price,
-    stock,
-    published_year
+    COUNT(*) AS books_with_subtitle
 FROM books
-ORDER BY book_id;
+WHERE subtitle IS NOT NULL;
+
+SELECT
+    COUNT(*) AS books_without_subtitle
+FROM books
+WHERE subtitle IS NULL;
 
 -------------------------------------------------------------------------------
 -- Step 3
--- Basic arithmetic expression
+-- UPPER
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 3: Arithmetic Expression ===
+PROMPT === Step 3: UPPER ===
 PROMPT
 
 SELECT
     book_id,
     title,
-    price,
-    price * 1.10 AS price_with_tax
+    UPPER(title) AS upper_title
 FROM books
 ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 4
--- Calculate inventory value
+-- LOWER
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 4: PRICE * STOCK ===
+PROMPT === Step 4: LOWER ===
 PROMPT
 
 SELECT
     book_id,
     title,
-    price,
-    stock,
-    price * stock AS inventory_value
+    LOWER(title) AS lower_title
 FROM books
-ORDER BY inventory_value DESC;
+ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 5
--- Expressions do not change stored values
+-- LENGTH
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 5: Stored Value vs Calculated Value ===
+PROMPT === Step 5: LENGTH ===
 PROMPT
 
 SELECT
     book_id,
     title,
-    price,
-    price + 500 AS hypothetical_price
+    LENGTH(title) AS title_length
 FROM books
-WHERE book_id IN (1001, 1002, 1003)
-ORDER BY book_id;
-
-PROMPT
-PROMPT IMPORTANT:
-PROMPT The expression changes only the query result.
-PROMPT The stored PRICE value is not updated.
-PROMPT
+ORDER BY
+    title_length DESC,
+    book_id ASC;
 
 -------------------------------------------------------------------------------
 -- Step 6
--- Character concatenation
+-- SUBSTR
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 6: Concatenation ===
+PROMPT === Step 6: SUBSTR ===
 PROMPT
 
 SELECT
     book_id,
-    title || ' - ' || category AS book_description
+    title,
+    SUBSTR(title, 1, 10) AS short_title
 FROM books
 ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 7
--- Combine stored values into a display expression
+-- ROUND
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 7: Build a Display Value ===
-PROMPT
-
-SELECT
-    book_id,
-    title || ' (' || published_year || ')' AS book_description
-FROM books
-ORDER BY book_id;
-
--------------------------------------------------------------------------------
--- Step 8
--- Inspect NULL values
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 8: Inspect SUBTITLE ===
-PROMPT
-
-SELECT
-    book_id,
-    title,
-    subtitle
-FROM books
-ORDER BY book_id;
-
-PROMPT
-PROMPT Some books have a SUBTITLE.
-PROMPT Other books contain NULL in SUBTITLE.
-PROMPT
-
--------------------------------------------------------------------------------
--- Step 9
--- Find NULL values
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 9: IS NULL ===
-PROMPT
-
-SELECT
-    book_id,
-    title,
-    subtitle
-FROM books
-WHERE subtitle IS NULL
-ORDER BY book_id;
-
--------------------------------------------------------------------------------
--- Step 10
--- Find non-NULL values
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 10: IS NOT NULL ===
-PROMPT
-
-SELECT
-    book_id,
-    title,
-    subtitle
-FROM books
-WHERE subtitle IS NOT NULL
-ORDER BY book_id;
-
--------------------------------------------------------------------------------
--- Step 11
--- Incorrect NULL comparison
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 11: NULL Cannot Be Compared with = ===
-PROMPT
-
-SELECT
-    book_id,
-    title,
-    subtitle
-FROM books
-WHERE subtitle = NULL;
-
-PROMPT
-PROMPT The query returns no matching rows.
-PROMPT Use IS NULL instead of = NULL.
-PROMPT
-
--------------------------------------------------------------------------------
--- Step 12
--- NULL in arithmetic expressions
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 12: NULL in an Arithmetic Expression ===
+PROMPT === Step 7: ROUND ===
 PROMPT
 
 SELECT
     book_id,
     title,
     price,
-    NULL AS discount_amount,
-    price - NULL AS calculated_price
+    price * 1.10 AS calculated_price,
+    ROUND(price * 1.10) AS rounded_price
 FROM books
-WHERE book_id IN (1001, 1002, 1003)
 ORDER BY book_id;
 
-PROMPT
-PROMPT A calculation involving NULL normally produces NULL.
-PROMPT
-
 -------------------------------------------------------------------------------
--- Step 13
--- NULL and concatenation in Oracle
+-- Step 8
+-- ROUND and TRUNC
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 13: NULL and Concatenation ===
+PROMPT === Step 8: ROUND vs TRUNC ===
+PROMPT
+
+SELECT
+    book_id,
+    title,
+    price,
+    ROUND(price / 3, 2) AS rounded_value,
+    TRUNC(price / 3, 2) AS truncated_value
+FROM books
+ORDER BY book_id;
+
+-------------------------------------------------------------------------------
+-- Step 9
+-- NVL
+-------------------------------------------------------------------------------
+
+PROMPT
+PROMPT === Step 9: NVL ===
 PROMPT
 
 SELECT
     book_id,
     title,
     subtitle,
-    title || ' - ' || subtitle AS book_description
+    NVL(subtitle, 'No subtitle') AS display_subtitle
 FROM books
 ORDER BY book_id;
 
+-------------------------------------------------------------------------------
+-- Step 10
+-- COALESCE
+-------------------------------------------------------------------------------
+
 PROMPT
-PROMPT IMPORTANT:
-PROMPT Oracle currently treats a zero-length character value as NULL.
-PROMPT In concatenation, a NULL character value does not necessarily make
-PROMPT the complete concatenated result NULL.
+PROMPT === Step 10: COALESCE ===
 PROMPT
+
+SELECT
+    book_id,
+    title,
+    subtitle,
+    COALESCE(subtitle, title) AS display_name
+FROM books
+ORDER BY book_id;
+
+-------------------------------------------------------------------------------
+-- Step 11
+-- Nested functions
+-------------------------------------------------------------------------------
+
+PROMPT
+PROMPT === Step 11: Nested Functions ===
+PROMPT
+
+SELECT
+    book_id,
+    title,
+    UPPER(NVL(subtitle, 'No subtitle')) AS display_subtitle
+FROM books
+ORDER BY book_id;
+
+-------------------------------------------------------------------------------
+-- Step 12
+-- Function in WHERE
+-------------------------------------------------------------------------------
+
+PROMPT
+PROMPT === Step 12: Function in WHERE ===
+PROMPT
+
+SELECT
+    book_id,
+    title
+FROM books
+WHERE UPPER(title) LIKE '%SQL%'
+ORDER BY book_id;
+
+-------------------------------------------------------------------------------
+-- Step 13
+-- Function in ORDER BY
+-------------------------------------------------------------------------------
+
+PROMPT
+PROMPT === Step 13: Function Result in ORDER BY ===
+PROMPT
+
+SELECT
+    book_id,
+    title,
+    LENGTH(title) AS title_length
+FROM books
+ORDER BY
+    title_length DESC,
+    book_id ASC;
 
 -------------------------------------------------------------------------------
 -- Step 14
--- Combine filtering, expressions, and sorting
+-- Function with arithmetic expression
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 14: Filter + Expression + Sort ===
+PROMPT === Step 14: Function + Arithmetic Expression ===
 PROMPT
 
 SELECT
@@ -320,32 +303,31 @@ SELECT
     title,
     price,
     stock,
-    price * stock AS inventory_value
+    ROUND(price * stock, 2) AS inventory_value
 FROM books
 WHERE stock > 0
-ORDER BY inventory_value DESC;
+ORDER BY
+    inventory_value DESC,
+    book_id ASC;
 
 -------------------------------------------------------------------------------
 -- Step 15
--- Expressions with multiple conditions
+-- Combine functions with filtering
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 15: Technology and Data Science Inventory ===
+PROMPT === Step 15: Catalog Display ===
 PROMPT
 
 SELECT
     book_id,
-    title,
-    category,
-    price,
-    stock,
-    price * stock AS inventory_value
+    UPPER(title) AS upper_title,
+    NVL(subtitle, 'No subtitle') AS display_subtitle,
+    category
 FROM books
 WHERE category IN ('Technology', 'Data Science')
-  AND stock > 0
 ORDER BY
-    inventory_value DESC,
+    category ASC,
     book_id ASC;
 
 -------------------------------------------------------------------------------
@@ -357,26 +339,27 @@ PROMPT
 PROMPT === Step 16: Final Business Question ===
 PROMPT
 
-PROMPT The bookstore wants to review books that do not yet have a subtitle.
+PROMPT The bookstore is preparing a catalog review.
 PROMPT
 PROMPT Requirements:
-PROMPT   - SUBTITLE is missing
-PROMPT   - book is currently in stock
+PROMPT   - only books currently in stock
+PROMPT   - display TITLE in uppercase
+PROMPT   - replace a NULL SUBTITLE with No subtitle
 PROMPT   - calculate PRICE * STOCK as INVENTORY_VALUE
-PROMPT   - show the highest inventory value first
-PROMPT   - use BOOK_ID as the final tie-breaker
+PROMPT   - round INVENTORY_VALUE to two decimal places
+PROMPT   - highest INVENTORY_VALUE first
+PROMPT   - BOOK_ID as the final tie-breaker
 PROMPT
 
 SELECT
     book_id,
-    title,
-    category,
+    UPPER(title) AS upper_title,
+    NVL(subtitle, 'No subtitle') AS display_subtitle,
     price,
     stock,
-    price * stock AS inventory_value
+    ROUND(price * stock, 2) AS inventory_value
 FROM books
-WHERE subtitle IS NULL
-  AND stock > 0
+WHERE stock > 0
 ORDER BY
     inventory_value DESC,
     book_id ASC;
@@ -387,18 +370,19 @@ ORDER BY
 
 PROMPT
 PROMPT ============================================================
-PROMPT Lesson 04 completed.
+PROMPT Lesson 05 completed.
 PROMPT
 PROMPT You practiced:
 PROMPT
-PROMPT   Arithmetic expressions
-PROMPT   Column aliases
-PROMPT   Character concatenation
-PROMPT   NULL
-PROMPT   IS NULL / IS NOT NULL
-PROMPT   NULL in expressions
-PROMPT   WHERE + expressions + ORDER BY
+PROMPT   UPPER / LOWER
+PROMPT   LENGTH / SUBSTR
+PROMPT   ROUND / TRUNC
+PROMPT   NVL / COALESCE
+PROMPT   Nested functions
+PROMPT   Functions in WHERE
+PROMPT   Functions in ORDER BY
+PROMPT   Functions with expressions
 PROMPT
 PROMPT Next:
-PROMPT   Lesson 05 - SQL Functions
+PROMPT   Lesson 06 - Aggregation and Grouping
 PROMPT ============================================================

@@ -7,7 +7,7 @@ Lesson 04 - OUTER JOIN
 
 File
 ----
-lesson04.sql
+course03_lesson04.sql
 
 Purpose
 -------
@@ -21,7 +21,7 @@ Prerequisite
 ------------
 Run:
 
-    @setup.sql
+    @course03_lesson04_setup.sql
 
 Required tables:
 

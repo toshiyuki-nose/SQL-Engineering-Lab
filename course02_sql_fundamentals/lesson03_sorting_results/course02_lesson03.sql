@@ -3,15 +3,15 @@
 SQL-Engineering-Lab
 
 Course 02 - SQL Fundamentals
-Lesson 06 - Aggregation and Grouping
+Lesson 03 - Sorting Results
 
 File
 ----
-lesson06.sql
+course02_lesson03.sql
 
 Purpose
 -------
-Practice aggregate functions, grouping, and filtering aggregated results.
+Practice sorting query results using the ORDER BY clause.
 
 Execute as:
 
@@ -19,20 +19,18 @@ Execute as:
 
 Prerequisite
 ------------
-Complete Lesson 05.
+Complete Lesson 02 and keep the BOOKS table.
 
 Topics
 ------
-1. COUNT
-2. COUNT and NULL
-3. SUM
-4. AVG
-5. MIN / MAX
-6. GROUP BY
-7. Aggregate expressions
-8. WHERE before aggregation
-9. HAVING
-10. ORDER BY with aggregated results
+1. ORDER BY
+2. ASC
+3. DESC
+4. Multiple sort columns
+5. WHERE + ORDER BY
+6. Sorting by aliases
+7. Sorting by column position
+8. Deterministic ordering
 
 ==============================================================================
 */
@@ -40,25 +38,20 @@ Topics
 PROMPT
 PROMPT ============================================================
 PROMPT SQL-Engineering-Lab
-PROMPT Course 02 - Lesson 06
-PROMPT Aggregation and Grouping
+PROMPT Course 02 - Lesson 03
+PROMPT Sorting Results
 PROMPT ============================================================
 PROMPT
 
 SET ECHO ON
 SET FEEDBACK ON
-SET LINESIZE 180
+SET LINESIZE 160
 SET PAGESIZE 100
 
-COLUMN CATEGORY FORMAT A15
-COLUMN MINIMUM_PRICE FORMAT 999999.99
-COLUMN MAXIMUM_PRICE FORMAT 999999.99
-COLUMN AVERAGE_PRICE FORMAT 999999.99
-COLUMN INVENTORY_VALUE FORMAT 99999999.99
-
 COLUMN TITLE FORMAT A30
-COLUMN SUBTITLE FORMAT A50
-
+COLUMN CATEGORY FORMAT A15
+COLUMN PRICE FORMAT 999999.99
+COLUMN BOOK_PRICE FORMAT 999999.99
 
 -------------------------------------------------------------------------------
 -- Step 1
@@ -80,11 +73,29 @@ FROM dual;
 
 -------------------------------------------------------------------------------
 -- Step 2
--- Inspect the source data
+-- Verify the prerequisite
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 2: Source Data ===
+PROMPT === Step 2: Verify BOOKS ===
+PROMPT
+
+SELECT
+    table_name,
+    tablespace_name
+FROM user_tables
+WHERE table_name = 'BOOKS';
+
+SELECT COUNT(*) AS book_count
+FROM books;
+
+-------------------------------------------------------------------------------
+-- Step 3
+-- Inspect the dataset without ORDER BY
+-------------------------------------------------------------------------------
+
+PROMPT
+PROMPT === Step 3: SELECT Without ORDER BY ===
 PROMPT
 
 SELECT
@@ -93,250 +104,257 @@ SELECT
     category,
     price,
     stock,
-    subtitle
-FROM books
-ORDER BY book_id;
-
--------------------------------------------------------------------------------
--- Step 3
--- COUNT all rows
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 3: COUNT All Books ===
-PROMPT
-
-SELECT
-    COUNT(*) AS book_count
+    published_year
 FROM books;
+
+PROMPT
+PROMPT IMPORTANT:
+PROMPT Without ORDER BY, the result order should not be treated as guaranteed.
+PROMPT
 
 -------------------------------------------------------------------------------
 -- Step 4
--- COUNT and NULL
+-- Ascending order
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 4: COUNT and NULL ===
+PROMPT === Step 4A: PRICE - Default Ascending Order ===
 PROMPT
 
 SELECT
-    COUNT(*) AS total_books,
-    COUNT(subtitle) AS books_with_subtitle
-FROM books;
+    book_id,
+    title,
+    price
+FROM books
+ORDER BY price;
 
 PROMPT
-PROMPT COUNT(*) counts rows.
-PROMPT COUNT(SUBTITLE) counts only non-NULL SUBTITLE values.
+PROMPT === Step 4B: PRICE ASC ===
 PROMPT
+
+SELECT
+    book_id,
+    title,
+    price
+FROM books
+ORDER BY price ASC;
 
 -------------------------------------------------------------------------------
 -- Step 5
--- SUM
+-- Descending order
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 5: SUM ===
+PROMPT === Step 5: PRICE DESC ===
 PROMPT
 
 SELECT
-    SUM(stock) AS total_stock
-FROM books;
+    book_id,
+    title,
+    price
+FROM books
+ORDER BY price DESC;
 
 -------------------------------------------------------------------------------
 -- Step 6
--- Aggregate an expression
+-- Sort character values
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 6: Total Inventory Value ===
+PROMPT === Step 6: CATEGORY ASC ===
 PROMPT
 
 SELECT
-    SUM(price * stock) AS inventory_value
-FROM books;
+    book_id,
+    title,
+    category
+FROM books
+ORDER BY category ASC;
 
 -------------------------------------------------------------------------------
 -- Step 7
--- AVG
+-- Sort by publication year
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 7: AVG ===
+PROMPT === Step 7: Newest Books First ===
 PROMPT
 
 SELECT
-    ROUND(AVG(price), 2) AS average_price
-FROM books;
+    book_id,
+    title,
+    published_year
+FROM books
+ORDER BY published_year DESC;
 
 -------------------------------------------------------------------------------
 -- Step 8
--- MIN and MAX
+-- Multiple sort columns
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 8: MIN and MAX ===
+PROMPT === Step 8: CATEGORY ASC, PRICE ASC ===
 PROMPT
 
 SELECT
-    MIN(price) AS minimum_price,
-    MAX(price) AS maximum_price
-FROM books;
+    book_id,
+    title,
+    category,
+    price
+FROM books
+ORDER BY
+    category ASC,
+    price ASC;
 
 -------------------------------------------------------------------------------
 -- Step 9
--- Multiple aggregate functions
+-- Different sort directions
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 9: Catalog Summary ===
+PROMPT === Step 9: CATEGORY ASC, PUBLISHED_YEAR DESC ===
 PROMPT
 
 SELECT
-    COUNT(*) AS book_count,
-    MIN(price) AS minimum_price,
-    MAX(price) AS maximum_price,
-    ROUND(AVG(price), 2) AS average_price,
-    SUM(stock) AS total_stock,
-    SUM(price * stock) AS inventory_value
-FROM books;
+    book_id,
+    title,
+    category,
+    published_year
+FROM books
+ORDER BY
+    category ASC,
+    published_year DESC;
 
 -------------------------------------------------------------------------------
 -- Step 10
--- GROUP BY
+-- WHERE + ORDER BY
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 10: Books by Category ===
+PROMPT === Step 10: Technology Books in Stock - Cheapest First ===
 PROMPT
 
 SELECT
-    category,
-    COUNT(*) AS book_count
+    book_id,
+    title,
+    price,
+    stock
 FROM books
-GROUP BY category
-ORDER BY category ASC;
+WHERE category = 'Technology'
+  AND stock > 0
+ORDER BY price ASC;
 
 -------------------------------------------------------------------------------
 -- Step 11
--- Multiple aggregates by category
+-- Filter by multiple categories and then sort
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 11: Category Summary ===
+PROMPT === Step 11: Technology and Data Science - Cheapest First ===
 PROMPT
 
 SELECT
+    book_id,
+    title,
     category,
-    COUNT(*) AS book_count,
-    ROUND(AVG(price), 2) AS average_price,
-    SUM(stock) AS total_stock
+    price
 FROM books
-GROUP BY category
-ORDER BY category ASC;
+WHERE category IN ('Technology', 'Data Science')
+ORDER BY price ASC;
 
 -------------------------------------------------------------------------------
 -- Step 12
--- Aggregate expressions by category
+-- Sort by a column not displayed
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 12: Inventory Value by Category ===
+PROMPT === Step 12: Sort by a Non-Selected Column ===
 PROMPT
 
 SELECT
-    category,
-    SUM(price * stock) AS inventory_value
+    book_id,
+    title
 FROM books
-GROUP BY category
-ORDER BY
-    inventory_value DESC,
-    category ASC;
+ORDER BY published_year DESC;
 
 -------------------------------------------------------------------------------
 -- Step 13
--- WHERE before GROUP BY
+-- Sort by a column alias
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 13: Aggregate In-Stock Books Only ===
+PROMPT === Step 13: Sort by Column Alias ===
 PROMPT
 
 SELECT
-    category,
-    COUNT(*) AS book_count,
-    SUM(stock) AS total_stock,
-    SUM(price * stock) AS inventory_value
+    book_id,
+    title,
+    price AS book_price
 FROM books
-WHERE stock > 0
-GROUP BY category
-ORDER BY category ASC;
+ORDER BY book_price DESC;
 
 -------------------------------------------------------------------------------
 -- Step 14
--- HAVING
+-- Sort by column position
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 14: HAVING ===
+PROMPT === Step 14: Sort by Column Position ===
+PROMPT
+
+PROMPT In this SELECT list:
+PROMPT   1 = TITLE
+PROMPT   2 = CATEGORY
+PROMPT   3 = PRICE
 PROMPT
 
 SELECT
+    title,
     category,
-    COUNT(*) AS book_count
+    price
 FROM books
-GROUP BY category
-HAVING COUNT(*) >= 3
-ORDER BY
-    book_count DESC,
-    category ASC;
-
-PROMPT
-PROMPT HAVING filters groups after aggregation.
-PROMPT
+ORDER BY 3 DESC;
 
 -------------------------------------------------------------------------------
 -- Step 15
--- WHERE and HAVING together
+-- Deterministic ordering with a tie-breaker
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 15: WHERE + GROUP BY + HAVING ===
+PROMPT === Step 15: Deterministic Ordering ===
 PROMPT
 
 SELECT
-    category,
-    COUNT(*) AS book_count,
-    SUM(stock) AS total_stock
+    book_id,
+    title,
+    published_year
 FROM books
-WHERE stock > 0
-GROUP BY category
-HAVING COUNT(*) >= 2
 ORDER BY
-    book_count DESC,
-    category ASC;
+    published_year DESC,
+    book_id ASC;
 
 -------------------------------------------------------------------------------
 -- Step 16
--- Full category analysis
+-- Combined filtering and sorting
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 16: Category Analysis ===
+PROMPT === Step 16: Combined Filtering and Sorting ===
 PROMPT
 
 SELECT
+    book_id,
+    title,
     category,
-    COUNT(*) AS book_count,
-    ROUND(AVG(price), 2) AS average_price,
-    MIN(price) AS minimum_price,
-    MAX(price) AS maximum_price,
-    SUM(stock) AS total_stock,
-    SUM(price * stock) AS inventory_value
+    price,
+    stock,
+    published_year
 FROM books
-GROUP BY category
+WHERE price >= 2500
+  AND stock > 0
 ORDER BY
-    inventory_value DESC,
-    category ASC;
+    price DESC,
+    book_id ASC;
 
 -------------------------------------------------------------------------------
 -- Step 17
@@ -347,34 +365,29 @@ PROMPT
 PROMPT === Step 17: Final Business Question ===
 PROMPT
 
-PROMPT The bookstore wants a category-level inventory report.
-PROMPT
-PROMPT Requirements:
-PROMPT   - only books currently in stock
-PROMPT   - group books by CATEGORY
-PROMPT   - count books as BOOK_COUNT
-PROMPT   - calculate average price as AVERAGE_PRICE
-PROMPT   - round AVERAGE_PRICE to two decimal places
-PROMPT   - calculate total stock as TOTAL_STOCK
-PROMPT   - calculate SUM(PRICE * STOCK) as INVENTORY_VALUE
-PROMPT   - include only categories with at least two in-stock books
-PROMPT   - show the largest INVENTORY_VALUE first
-PROMPT   - use CATEGORY as the final tie-breaker
+PROMPT Find Technology or Data Science books:
+PROMPT   - currently in stock
+PROMPT   - published between 2020 and 2025
+PROMPT   - category ascending
+PROMPT   - newest books first within each category
+PROMPT   - BOOK_ID as the final tie-breaker
 PROMPT
 
 SELECT
+    book_id,
+    title,
     category,
-    COUNT(*) AS book_count,
-    ROUND(AVG(price), 2) AS average_price,
-    SUM(stock) AS total_stock,
-    SUM(price * stock) AS inventory_value
+    price,
+    stock,
+    published_year
 FROM books
-WHERE stock > 0
-GROUP BY category
-HAVING COUNT(*) >= 2
+WHERE category IN ('Technology', 'Data Science')
+  AND stock > 0
+  AND published_year BETWEEN 2020 AND 2025
 ORDER BY
-    inventory_value DESC,
-    category ASC;
+    category ASC,
+    published_year DESC,
+    book_id ASC;
 
 -------------------------------------------------------------------------------
 -- Completion
@@ -382,19 +395,18 @@ ORDER BY
 
 PROMPT
 PROMPT ============================================================
-PROMPT Lesson 06 completed.
+PROMPT Lesson 03 completed.
 PROMPT
 PROMPT You practiced:
 PROMPT
-PROMPT   COUNT
-PROMPT   SUM
-PROMPT   AVG
-PROMPT   MIN / MAX
-PROMPT   GROUP BY
-PROMPT   WHERE before aggregation
-PROMPT   HAVING
-PROMPT   Aggregate expressions
-PROMPT   ORDER BY with aggregated results
+PROMPT   ORDER BY
+PROMPT   ASC / DESC
+PROMPT   Multiple sort columns
+PROMPT   WHERE + ORDER BY
+PROMPT   Sorting by aliases
+PROMPT   Sorting by column position
+PROMPT   Deterministic ordering
 PROMPT
-PROMPT Course 02 - SQL Fundamentals completed.
+PROMPT Next:
+PROMPT   Lesson 04 - Expressions and NULL
 PROMPT ============================================================

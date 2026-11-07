@@ -7,7 +7,7 @@ Lesson 02 - Filtering Rows
 
 File
 ----
-cleanup.sql
+course02_lesson02_cleanup.sql
 
 Purpose
 -------
@@ -24,7 +24,7 @@ BOOKS is reused by later Course 02 lessons.
 
 Do NOT run this script after every Lesson 02 exercise.
 
-Use it only when you want to test setup.sql again from a clean state.
+Use it only when you want to test course02_lesson02_setup.sql again from a clean state.
 
 ==============================================================================
 */
@@ -97,5 +97,5 @@ PROMPT ============================================================
 PROMPT Cleanup completed.
 PROMPT
 PROMPT BOOKS should no longer exist.
-PROMPT Run setup.sql to recreate the dataset.
+PROMPT Run course02_lesson02_setup.sql to recreate the dataset.
 PROMPT ============================================================

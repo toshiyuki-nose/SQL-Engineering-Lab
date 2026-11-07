@@ -103,7 +103,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 Then execute:
 
 ```sql
-@course05_advanced_sql_queries/lesson03_set_operations/lesson03.sql
+@course05_advanced_sql_queries/lesson03_set_operations/course05_lesson03.sql
 ```
 
 The script writes its log to:

@@ -73,7 +73,7 @@ Each lesson builds on the previous one.
 ```
 course01_oracle_environment/
 
-├── README.md
+├── course01_README.md
 ├── lesson01_oracle_database_overview/
 ├── lesson02_connect_to_freepdb1/
 ├── lesson03_sql_clients/

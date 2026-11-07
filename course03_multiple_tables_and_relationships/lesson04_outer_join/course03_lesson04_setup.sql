@@ -7,7 +7,7 @@ Lesson 04 - OUTER JOIN
 
 File
 ----
-setup.sql
+course03_lesson04_setup.sql
 
 Purpose
 -------
@@ -264,7 +264,7 @@ PROMPT These rows intentionally have no related data.
 PROMPT
 PROMPT Continue with:
 PROMPT
-PROMPT   @lesson04.sql
+PROMPT   @course03_lesson04.sql
 PROMPT ============================================================
 PROMPT
 

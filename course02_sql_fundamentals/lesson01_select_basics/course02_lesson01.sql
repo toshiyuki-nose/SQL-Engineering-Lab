@@ -7,7 +7,7 @@ Lesson 01 - SELECT Basics
 
 File
 ----
-lesson01.sql
+course02_lesson01.sql
 
 Purpose
 -------

@@ -164,7 +164,7 @@ The object we will create is:
 LEARNING_TOPICS
 ```
 
-If you are repeating this lesson, use the provided `cleanup.sql` script before starting again.
+If you are repeating this lesson, use the provided `course01_lesson05_cleanup.sql` script before starting again.
 
 ---
 
@@ -672,18 +672,18 @@ You can then execute the Lesson 05 exercises again from the beginning.
 
 ---
 
-# Why Keep cleanup.sql Separate?
+# Why Keep course01_lesson05_cleanup.sql Separate?
 
 The main lesson creates and uses the learning environment.
 
 Cleanup serves a different purpose:
 
 ```text
-lesson05.sql
+course01_lesson05.sql
     │
     └── Build and verify
 
-cleanup.sql
+course01_lesson05_cleanup.sql
     │
     └── Reset
 ```
@@ -746,7 +746,7 @@ Complete the following exercises as `SQL_LAB @ FREEPDB1`.
 10. Explain why `SQL_LAB` is able to create this table.
 11. Explain the relationship between `SQL_LAB`, the `SQL_LAB` schema, `LEARNING_TOPICS`, and `FREEPDB1_DATA`.
 12. Optionally inspect the same table as `SYS @ FREEPDB1`.
-13. Run `cleanup.sql`.
+13. Run `course01_lesson05_cleanup.sql`.
 14. Verify that `LEARNING_TOPICS` has been removed.
 15. Run the lesson again to confirm that the environment is repeatable.
 

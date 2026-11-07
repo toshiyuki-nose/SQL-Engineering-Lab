@@ -7,7 +7,7 @@ Lesson 05 - Creating Your First Database Objects
 
 File
 ----
-lesson05.sql
+course01_lesson05.sql
 
 Purpose
 -------
@@ -243,5 +243,5 @@ PROMPT   Table             : LEARNING_TOPICS
 PROMPT   Tablespace        : FREEPDB1_DATA
 PROMPT   Sample Rows       : 5
 PROMPT
-PROMPT Use cleanup.sql to reset this lesson.
+PROMPT Use course01_lesson05_cleanup.sql to reset this lesson.
 PROMPT ============================================================

@@ -156,32 +156,32 @@ The database itself will grow together with the lessons.
 ```text
 course03_multiple_tables_and_relationships/
 │
-├── README.md
+├── course03_README.md
 │
 ├── lesson01_relational_database_basics/
 │   ├── course03_lesson01.md
-│   └── lesson01.sql
+│   └── course03_lesson01.sql
 │
 ├── lesson02_creating_related_tables/
 │   ├── course03_lesson02.md
-│   ├── setup.sql
-│   └── lesson02.sql
+│   ├── course03_lesson02_setup.sql
+│   └── course03_lesson02.sql
 │
 ├── lesson03_inner_join/
 │   ├── course03_lesson03.md
-│   └── lesson03.sql
+│   └── course03_lesson03.sql
 │
 ├── lesson04_outer_join/
 │   ├── course03_lesson04.md
-│   └── lesson04.sql
+│   └── course03_lesson04.sql
 │
 ├── lesson05_multiple_table_joins/
 │   ├── course03_lesson05.md
-│   └── lesson05.sql
+│   └── course03_lesson05.sql
 │
 └── lesson06_subqueries/
     ├── course03_lesson06.md
-    └── lesson06.sql
+    └── course03_lesson06.sql
 ```
 
 Additional setup or cleanup scripts may be introduced when required by a

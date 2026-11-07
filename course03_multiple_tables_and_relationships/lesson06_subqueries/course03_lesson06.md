@@ -936,7 +936,7 @@ This lesson follows the SQL-Engineering-Lab logging standard.
 Run:
 
 ```sql
-@lesson06.sql
+@course03_lesson06.sql
 ```
 
 SQL*Plus output is written to:

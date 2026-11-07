@@ -143,7 +143,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 In SQL*Plus:
 
 ```sql
-@course05_advanced_sql_queries/lesson01_case_expressions/lesson01.sql
+@course05_advanced_sql_queries/lesson01_case_expressions/course05_lesson01.sql
 ```
 
 Log output:

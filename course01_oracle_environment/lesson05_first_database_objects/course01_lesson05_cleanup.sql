@@ -7,7 +7,7 @@ Lesson 05 - Creating Your First Database Objects
 
 File
 ----
-cleanup.sql
+course01_lesson05_cleanup.sql
 
 Purpose
 -------
@@ -98,5 +98,5 @@ PROMPT Cleanup completed.
 PROMPT
 PROMPT LEARNING_TOPICS should no longer exist.
 PROMPT
-PROMPT lesson05.sql can now be executed again.
+PROMPT course01_lesson05.sql can now be executed again.
 PROMPT ============================================================

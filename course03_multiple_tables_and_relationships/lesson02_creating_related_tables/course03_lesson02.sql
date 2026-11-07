@@ -7,7 +7,7 @@ Lesson 02 - Creating Related Tables
 
 File
 ----
-lesson02.sql
+course03_lesson02.sql
 
 Purpose
 -------
@@ -20,7 +20,7 @@ Execute as:
 
 Prerequisite
 ------------
-Run setup.sql successfully before this script.
+Run course03_lesson02_setup.sql successfully before this script.
 
 Important
 ---------

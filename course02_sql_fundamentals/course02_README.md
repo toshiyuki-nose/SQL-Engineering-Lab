@@ -130,31 +130,31 @@ By the end of the course, you will be able to move from a simple table query to 
 ```text
 course02_sql_fundamentals/
 
-├── README.md
+├── course02_README.md
 │
 ├── lesson01_select_basics/
 │   ├── course02_lesson01.md
-│   └── lesson01.sql
+│   └── course02_lesson01.sql
 │
 ├── lesson02_filtering_rows/
 │   ├── course02_lesson02.md
-│   └── lesson02.sql
+│   └── course02_lesson02.sql
 │
 ├── lesson03_sorting_results/
 │   ├── course02_lesson03.md
-│   └── lesson03.sql
+│   └── course02_lesson03.sql
 │
 ├── lesson04_expressions_and_null/
 │   ├── course02_lesson04.md
-│   └── lesson04.sql
+│   └── course02_lesson04.sql
 │
 ├── lesson05_sql_functions/
 │   ├── course02_lesson05.md
-│   └── lesson05.sql
+│   └── course02_lesson05.sql
 │
 └── lesson06_aggregation_and_grouping/
     ├── course02_lesson06.md
-    └── lesson06.sql
+    └── course02_lesson06.sql
 ```
 
 Additional files such as `setup.sql`, `cleanup.sql`, or sample data scripts may be introduced when required by a lesson.

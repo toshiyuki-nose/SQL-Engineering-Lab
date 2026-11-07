@@ -159,7 +159,7 @@ BOOKS
 └── PUBLISHED_YEAR
 ```
 
-Run `setup.sql` before executing the main lesson script.
+Run `course02_lesson02_setup.sql` before executing the main lesson script.
 
 ---
 

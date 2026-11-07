@@ -7,7 +7,7 @@ Lesson 02 - Creating Related Tables
 
 File
 ----
-setup.sql
+course03_lesson02_setup.sql
 
 Purpose
 -------
@@ -810,7 +810,7 @@ PROMPT relationship through BOOK_AUTHORS.
 PROMPT
 PROMPT Continue with:
 PROMPT
-PROMPT   @lesson02.sql
+PROMPT   @course03_lesson02.sql
 PROMPT ============================================================
 
 /*

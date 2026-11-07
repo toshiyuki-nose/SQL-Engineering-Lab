@@ -950,7 +950,7 @@ This lesson follows the SQL-Engineering-Lab logging standard.
 Run:
 
 ```sql
-@lesson05.sql
+@course03_lesson05.sql
 ```
 
 SQL*Plus output is written to:

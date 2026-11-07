@@ -145,7 +145,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 After entering the password, run this command inside SQL*Plus:
 
 ```sql
-@course04_data_manipulation_and_transactions/lesson01_insert_basics/lesson01.sql
+@course04_data_manipulation_and_transactions/lesson01_insert_basics/course04_lesson01.sql
 ```
 
 The script writes to `course04_data_manipulation_and_transactions/lesson01_insert_basics/logs/lesson01.log`. Run SQL*Plus from the repository root so the relative path resolves correctly.

@@ -112,7 +112,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 In SQL*Plus:
 
 ```sql
-@course04_data_manipulation_and_transactions/lesson05_transactions_and_commit_rollback/lesson05.sql
+@course04_data_manipulation_and_transactions/lesson05_transactions_and_commit_rollback/course04_lesson05.sql
 ```
 
 Log output: `course04_data_manipulation_and_transactions/lesson05_transactions_and_commit_rollback/logs/lesson05.log`.

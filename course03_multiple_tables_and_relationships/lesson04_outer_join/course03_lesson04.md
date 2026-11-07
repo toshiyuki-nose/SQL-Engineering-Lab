@@ -118,7 +118,7 @@ AUTHORS
 BOOK_AUTHORS
 ```
 
-For this lesson, `setup.sql` adds:
+For this lesson, `course03_lesson04_setup.sql` adds:
 
 ```text
 CATEGORIES
@@ -644,7 +644,7 @@ This lesson follows the SQL-Engineering-Lab logging standard.
 Run:
 
 ```sql
-@setup.sql
+@course03_lesson04_setup.sql
 ```
 
 to create the Lesson 04 sample data.
@@ -658,7 +658,7 @@ logs/setup.log
 Then run:
 
 ```sql
-@lesson04.sql
+@course03_lesson04.sql
 ```
 
 The lesson execution is recorded in:

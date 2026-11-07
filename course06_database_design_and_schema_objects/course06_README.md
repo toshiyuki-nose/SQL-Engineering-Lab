@@ -41,14 +41,14 @@ Refer to [Oracle Environment](../docs/oracle_environment.md) for the established
 
 | Lesson | Title | Key Topics | Status |
 |---|---|---|---|
-| 01 | Relational Database Design | Entities, attributes, keys, relationships, ER modeling | Planned |
-| 02 | Database Normalization | Functional dependencies, 1NF, 2NF, 3NF | Planned |
-| 03 | Constraints and Data Integrity | PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, NOT NULL | Planned |
-| 04 | Views | CREATE VIEW, reusable queries, view considerations | Planned |
-| 05 | Sequences and Identity Columns | CREATE SEQUENCE, NEXTVAL, identity columns | Planned |
-| 06 | Indexes and Schema Design | B-tree indexes, composite indexes, design trade-offs | Planned |
+| 01 | Relational Database Design | Entities, attributes, keys, relationships, ER modeling | Complete |
+| 02 | Database Normalization | Functional dependencies, 1NF, 2NF, 3NF | Complete |
+| 03 | Constraints and Data Integrity | PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, NOT NULL | Complete |
+| 04 | Views | CREATE VIEW, reusable queries, view considerations | Complete |
+| 05 | Sequences and Identity Columns | CREATE SEQUENCE, NEXTVAL, identity columns | Complete |
+| 06 | Indexes and Schema Design | B-tree indexes, composite indexes, design trade-offs | Complete |
 
-Lesson materials and SQL exercises will be added incrementally after review and verification.
+All six lessons have been added to the course curriculum. Review each lesson's SQL exercises and verification notes before running schema-changing scripts in a shared environment.
 
 ## Learning Approach
 
@@ -68,7 +68,7 @@ This course covers schema design and basic schema-object operations. Detailed ex
 
 ## Completion Criteria
 
-Course 06 is complete when all six lessons have documented explanations, reproducible Oracle exercises, expected results, and verified examples.
+Course 06 is considered complete when all six lessons have documented explanations and accompanying SQL exercises. Reproducibility, expected results, and Oracle execution verification should be checked as part of ongoing quality review.
 
 ---
 

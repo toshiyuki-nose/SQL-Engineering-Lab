@@ -7,7 +7,7 @@ Lesson 04 - Expressions and NULL
 
 File
 ----
-setup.sql
+course02_lesson04_setup.sql
 
 Purpose
 -------
@@ -180,5 +180,5 @@ PROMPT   - rows with a SUBTITLE
 PROMPT   - rows without a SUBTITLE
 PROMPT
 PROMPT Continue with:
-PROMPT   @lesson04.sql
+PROMPT   @course02_lesson04.sql
 PROMPT ============================================================

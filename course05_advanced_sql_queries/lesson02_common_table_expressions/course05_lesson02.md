@@ -130,7 +130,7 @@ Good habits:
 
 ## 7. Lab Walkthrough
 
-Run `lesson02.sql` to explore:
+Run `course05_lesson02.sql` to explore:
 
 | Step | Exercise | Expected observation |
 | --- | --- | --- |
@@ -170,7 +170,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 Then run:
 
 ```sql
-@course05_advanced_sql_queries/lesson02_common_table_expressions/lesson02.sql
+@course05_advanced_sql_queries/lesson02_common_table_expressions/course05_lesson02.sql
 ```
 
 Log file:

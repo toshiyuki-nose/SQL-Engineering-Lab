@@ -149,7 +149,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 Run:
 
 ```sql
-@course04_data_manipulation_and_transactions/lesson04_merge_and_upsert/lesson04.sql
+@course04_data_manipulation_and_transactions/lesson04_merge_and_upsert/course04_lesson04.sql
 ```
 
 Expected log path:

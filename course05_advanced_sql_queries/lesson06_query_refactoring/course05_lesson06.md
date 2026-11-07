@@ -16,7 +16,7 @@ By the end of this lesson, you will be able to:
 - The existing `BOOKS` and `CATEGORIES` tables from the Book Store Database.
 - Familiarity with `JOIN`, `CASE`, `GROUP BY`, CTEs, and window functions.
 
-All examples are **read-only**. Execute `lesson06.sql` from the repository root in SQL*Plus. The script creates a spool log at `course05_advanced_sql_queries/lesson06_query_refactoring/logs/lesson06.log`.
+All examples are **read-only**. Execute `course05_lesson06.sql` from the repository root in SQL*Plus. The script creates a spool log at `course05_advanced_sql_queries/lesson06_query_refactoring/logs/lesson06.log`.
 
 ## Refactoring principles
 

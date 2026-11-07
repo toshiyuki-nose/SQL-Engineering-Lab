@@ -7,7 +7,7 @@ Lesson 01 - Relational Database Basics
 
 File
 ----
-lesson01.sql
+course03_lesson01.sql
 
 Purpose
 -------

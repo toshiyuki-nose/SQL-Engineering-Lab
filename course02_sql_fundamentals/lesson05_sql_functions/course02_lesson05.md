@@ -109,7 +109,7 @@ No additional setup script is required.
 Run:
 
 ```text
-@lesson05.sql
+@course02_lesson05.sql
 ```
 
 ---

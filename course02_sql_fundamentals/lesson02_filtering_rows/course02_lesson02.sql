@@ -3,15 +3,15 @@
 SQL-Engineering-Lab
 
 Course 02 - SQL Fundamentals
-Lesson 05 - SQL Functions
+Lesson 02 - Filtering Rows
 
 File
 ----
-lesson05.sql
+course02_lesson02.sql
 
 Purpose
 -------
-Practice character, numeric, and NULL-handling SQL functions.
+Practice filtering rows using the WHERE clause.
 
 Execute as:
 
@@ -19,20 +19,19 @@ Execute as:
 
 Prerequisite
 ------------
-Complete Lesson 04.
+Run course02_lesson02_setup.sql before this script.
 
 Topics
 ------
-1. UPPER
-2. LOWER
-3. LENGTH
-4. SUBSTR
-5. ROUND
-6. TRUNC
-7. NVL
-8. COALESCE
-9. Nested functions
-10. Functions with WHERE and ORDER BY
+1. WHERE
+2. Comparison operators
+3. AND
+4. OR
+5. NOT
+6. BETWEEN
+7. IN
+8. LIKE
+9. Combined conditions
 
 ==============================================================================
 */
@@ -40,28 +39,19 @@ Topics
 PROMPT
 PROMPT ============================================================
 PROMPT SQL-Engineering-Lab
-PROMPT Course 02 - Lesson 05
-PROMPT SQL Functions
+PROMPT Course 02 - Lesson 02
+PROMPT Filtering Rows
 PROMPT ============================================================
 PROMPT
 
 SET ECHO ON
 SET FEEDBACK ON
-SET LINESIZE 180
+SET LINESIZE 160
 SET PAGESIZE 100
 
 COLUMN TITLE FORMAT A30
-COLUMN UPPER_TITLE FORMAT A30
-COLUMN LOWER_TITLE FORMAT A30
-COLUMN SHORT_TITLE FORMAT A15
-COLUMN SUBTITLE FORMAT A50
-COLUMN DISPLAY_SUBTITLE FORMAT A50
-COLUMN DISPLAY_NAME FORMAT A50
 COLUMN CATEGORY FORMAT A15
 COLUMN PRICE FORMAT 999999.99
-COLUMN INVENTORY_VALUE FORMAT 99999999.99
-COLUMN ROUNDED_VALUE FORMAT 999999.99
-COLUMN TRUNCATED_VALUE FORMAT 999999.99
 
 -------------------------------------------------------------------------------
 -- Step 1
@@ -83,286 +73,277 @@ FROM dual;
 
 -------------------------------------------------------------------------------
 -- Step 2
--- Verify the prerequisite
+-- Inspect the complete dataset
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 2: Verify BOOKS ===
+PROMPT === Step 2: Inspect BOOKS ===
 PROMPT
 
-SELECT COUNT(*) AS book_count
+SELECT
+    book_id,
+    title,
+    category,
+    price,
+    stock,
+    published_year
 FROM books;
-
-SELECT
-    COUNT(*) AS books_with_subtitle
-FROM books
-WHERE subtitle IS NOT NULL;
-
-SELECT
-    COUNT(*) AS books_without_subtitle
-FROM books
-WHERE subtitle IS NULL;
 
 -------------------------------------------------------------------------------
 -- Step 3
--- UPPER
+-- Equality
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 3: UPPER ===
+PROMPT === Step 3: CATEGORY = Technology ===
 PROMPT
 
 SELECT
     book_id,
     title,
-    UPPER(title) AS upper_title
+    category
 FROM books
-ORDER BY book_id;
+WHERE category = 'Technology';
 
 -------------------------------------------------------------------------------
 -- Step 4
--- LOWER
+-- Not equal
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 4: LOWER ===
+PROMPT === Step 4: CATEGORY <> Technology ===
 PROMPT
 
 SELECT
     book_id,
     title,
-    LOWER(title) AS lower_title
+    category
 FROM books
-ORDER BY book_id;
+WHERE category <> 'Technology';
 
 -------------------------------------------------------------------------------
 -- Step 5
--- LENGTH
+-- Numeric comparisons
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 5: LENGTH ===
+PROMPT === Step 5A: PRICE >= 3000 ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    LENGTH(title) AS title_length
+    price
 FROM books
-ORDER BY
-    title_length DESC,
-    book_id ASC;
+WHERE price >= 3000;
+
+PROMPT
+PROMPT === Step 5B: PRICE < 2000 ===
+PROMPT
+
+SELECT
+    title,
+    price
+FROM books
+WHERE price < 2000;
 
 -------------------------------------------------------------------------------
 -- Step 6
--- SUBSTR
+-- AND
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 6: SUBSTR ===
+PROMPT === Step 6: AND ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    SUBSTR(title, 1, 10) AS short_title
+    category,
+    price
 FROM books
-ORDER BY book_id;
+WHERE category = 'Technology'
+  AND price >= 3000;
 
 -------------------------------------------------------------------------------
 -- Step 7
--- ROUND
+-- OR
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 7: ROUND ===
+PROMPT === Step 7: OR ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    price,
-    price * 1.10 AS calculated_price,
-    ROUND(price * 1.10) AS rounded_price
+    category
 FROM books
-ORDER BY book_id;
+WHERE category = 'Technology'
+   OR category = 'Data Science';
 
 -------------------------------------------------------------------------------
 -- Step 8
--- ROUND and TRUNC
+-- NOT
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 8: ROUND vs TRUNC ===
+PROMPT === Step 8: NOT ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    price,
-    ROUND(price / 3, 2) AS rounded_value,
-    TRUNC(price / 3, 2) AS truncated_value
+    category
 FROM books
-ORDER BY book_id;
+WHERE NOT category = 'Technology';
 
 -------------------------------------------------------------------------------
 -- Step 9
--- NVL
+-- BETWEEN
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 9: NVL ===
+PROMPT === Step 9: BETWEEN ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    subtitle,
-    NVL(subtitle, 'No subtitle') AS display_subtitle
+    published_year
 FROM books
-ORDER BY book_id;
+WHERE published_year BETWEEN 2020 AND 2024;
 
 -------------------------------------------------------------------------------
 -- Step 10
--- COALESCE
+-- IN
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 10: COALESCE ===
+PROMPT === Step 10: IN ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    subtitle,
-    COALESCE(subtitle, title) AS display_name
+    category
 FROM books
-ORDER BY book_id;
+WHERE category IN (
+    'Technology',
+    'Data Science',
+    'Business'
+);
 
 -------------------------------------------------------------------------------
 -- Step 11
--- Nested functions
+-- LIKE
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 11: Nested Functions ===
-PROMPT
-
-SELECT
-    book_id,
-    title,
-    UPPER(NVL(subtitle, 'No subtitle')) AS display_subtitle
-FROM books
-ORDER BY book_id;
-
--------------------------------------------------------------------------------
--- Step 12
--- Function in WHERE
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 12: Function in WHERE ===
+PROMPT === Step 11A: Titles Containing SQL ===
 PROMPT
 
 SELECT
     book_id,
     title
 FROM books
-WHERE UPPER(title) LIKE '%SQL%'
-ORDER BY book_id;
+WHERE title LIKE '%SQL%';
+
+PROMPT
+PROMPT === Step 11B: Titles Starting with Data ===
+PROMPT
+
+SELECT
+    book_id,
+    title
+FROM books
+WHERE title LIKE 'Data%';
+
+-------------------------------------------------------------------------------
+-- Step 12
+-- Stock filtering
+-------------------------------------------------------------------------------
+
+PROMPT
+PROMPT === Step 12A: Books in Stock ===
+PROMPT
+
+SELECT
+    title,
+    stock
+FROM books
+WHERE stock > 0;
+
+PROMPT
+PROMPT === Step 12B: Out-of-Stock Books ===
+PROMPT
+
+SELECT
+    title,
+    stock
+FROM books
+WHERE stock = 0;
 
 -------------------------------------------------------------------------------
 -- Step 13
--- Function in ORDER BY
+-- Combined conditions
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 13: Function Result in ORDER BY ===
+PROMPT === Step 13: Combined Conditions ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    LENGTH(title) AS title_length
+    category,
+    price,
+    stock
 FROM books
-ORDER BY
-    title_length DESC,
-    book_id ASC;
+WHERE category IN ('Technology', 'Data Science')
+  AND price <= 4000
+  AND stock > 0;
 
 -------------------------------------------------------------------------------
 -- Step 14
--- Function with arithmetic expression
+-- Parentheses and logical conditions
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 14: Function + Arithmetic Expression ===
+PROMPT === Step 14: Parentheses ===
 PROMPT
 
 SELECT
-    book_id,
     title,
-    price,
-    stock,
-    ROUND(price * stock, 2) AS inventory_value
+    category,
+    stock
 FROM books
-WHERE stock > 0
-ORDER BY
-    inventory_value DESC,
-    book_id ASC;
+WHERE (
+        category = 'Technology'
+        OR category = 'Data Science'
+      )
+  AND stock > 0;
 
 -------------------------------------------------------------------------------
 -- Step 15
--- Combine functions with filtering
--------------------------------------------------------------------------------
-
-PROMPT
-PROMPT === Step 15: Catalog Display ===
-PROMPT
-
-SELECT
-    book_id,
-    UPPER(title) AS upper_title,
-    NVL(subtitle, 'No subtitle') AS display_subtitle,
-    category
-FROM books
-WHERE category IN ('Technology', 'Data Science')
-ORDER BY
-    category ASC,
-    book_id ASC;
-
--------------------------------------------------------------------------------
--- Step 16
 -- Final business question
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 16: Final Business Question ===
+PROMPT === Step 15: Final Business Question ===
 PROMPT
 
-PROMPT The bookstore is preparing a catalog review.
-PROMPT
-PROMPT Requirements:
-PROMPT   - only books currently in stock
-PROMPT   - display TITLE in uppercase
-PROMPT   - replace a NULL SUBTITLE with No subtitle
-PROMPT   - calculate PRICE * STOCK as INVENTORY_VALUE
-PROMPT   - round INVENTORY_VALUE to two decimal places
-PROMPT   - highest INVENTORY_VALUE first
-PROMPT   - BOOK_ID as the final tie-breaker
+PROMPT Find Technology or Data Science books:
+PROMPT   - published between 2020 and 2025
+PROMPT   - price <= 4000
+PROMPT   - stock > 0
 PROMPT
 
 SELECT
     book_id,
-    UPPER(title) AS upper_title,
-    NVL(subtitle, 'No subtitle') AS display_subtitle,
+    title,
+    category,
     price,
     stock,
-    ROUND(price * stock, 2) AS inventory_value
+    published_year
 FROM books
-WHERE stock > 0
-ORDER BY
-    inventory_value DESC,
-    book_id ASC;
+WHERE category IN ('Technology', 'Data Science')
+  AND published_year BETWEEN 2020 AND 2025
+  AND price <= 4000
+  AND stock > 0;
 
 -------------------------------------------------------------------------------
 -- Completion
@@ -370,19 +351,18 @@ ORDER BY
 
 PROMPT
 PROMPT ============================================================
-PROMPT Lesson 05 completed.
+PROMPT Lesson 02 completed.
 PROMPT
 PROMPT You practiced:
 PROMPT
-PROMPT   UPPER / LOWER
-PROMPT   LENGTH / SUBSTR
-PROMPT   ROUND / TRUNC
-PROMPT   NVL / COALESCE
-PROMPT   Nested functions
-PROMPT   Functions in WHERE
-PROMPT   Functions in ORDER BY
-PROMPT   Functions with expressions
+PROMPT   WHERE
+PROMPT   Comparison operators
+PROMPT   AND / OR / NOT
+PROMPT   BETWEEN
+PROMPT   IN
+PROMPT   LIKE
+PROMPT   Combined conditions
 PROMPT
 PROMPT Next:
-PROMPT   Lesson 06 - Aggregation and Grouping
+PROMPT   Lesson 03 - Sorting Results
 PROMPT ============================================================

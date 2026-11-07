@@ -79,7 +79,7 @@ WHERE rn = 1;
 ## 5. Practice workflow
 
 1. Connect to `SQL_LAB` on `FREEPDB1` using SQL*Plus.
-2. Run `lesson04.sql` from the repository root.
+2. Run `course05_lesson04.sql` from the repository root.
 3. Review the nine numbered sections and the final validation output.
 4. Save and submit `logs/lesson04.log` for review.
 
@@ -89,7 +89,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 ```
 
 ```sql
-@course05_advanced_sql_queries/lesson04_window_functions_basics/lesson04.sql
+@course05_advanced_sql_queries/lesson04_window_functions_basics/course05_lesson04.sql
 ```
 
 ## Review questions

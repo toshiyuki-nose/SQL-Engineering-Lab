@@ -159,13 +159,13 @@ SQL*Plus can execute SQL stored in a file.
 For example:
 
 ```text
-@lesson03.sql
+@course01_lesson03.sql
 ```
 
 You can also specify a path.
 
 ```text
-@E:\SQL\SQL-Engineering-Lab\course01_oracle_environment\lesson03_sql_clients\lesson03.sql
+@E:\SQL\SQL-Engineering-Lab\course01_oracle_environment\lesson03_sql_clients\course01_lesson03.sql
 ```
 
 This feature is important throughout SQL-Engineering-Lab because executable SQL examples are stored as `.sql` files.
@@ -387,7 +387,7 @@ For example:
 ```text
 lesson03_sql_clients/
 ├── course01_lesson03.md
-└── lesson03.sql
+└── course01_lesson03.sql
 ```
 
 The roles are different:
@@ -395,7 +395,7 @@ The roles are different:
 | File | Purpose |
 |------|---------|
 | `course01_lesson03.md` | Explain concepts, procedures, and expected results |
-| `lesson03.sql` | Store executable and reproducible SQL |
+| `course01_lesson03.sql` | Store executable and reproducible SQL |
 
 SQL Developer worksheets should be treated as temporary working areas rather than permanent project artifacts.
 

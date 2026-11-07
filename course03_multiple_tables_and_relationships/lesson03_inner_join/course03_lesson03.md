@@ -605,7 +605,7 @@ Starting with Course 03, SQL-Engineering-Lab records SQL*Plus execution output u
 Running:
 
 ```sql
-@lesson03.sql
+@course03_lesson03.sql
 ```
 
 creates:

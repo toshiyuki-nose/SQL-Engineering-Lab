@@ -132,7 +132,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 In SQL*Plus:
 
 ```sql
-@course04_data_manipulation_and_transactions/lesson03_delete_statements/lesson03.sql
+@course04_data_manipulation_and_transactions/lesson03_delete_statements/course04_lesson03.sql
 ```
 
 The output log is `course04_data_manipulation_and_transactions/lesson03_delete_statements/logs/lesson03.log`.

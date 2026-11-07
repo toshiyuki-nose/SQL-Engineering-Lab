@@ -7,7 +7,7 @@ Lesson 05 - Multiple Table Joins
 
 File
 ----
-lesson05.sql
+course03_lesson05.sql
 
 Purpose
 -------

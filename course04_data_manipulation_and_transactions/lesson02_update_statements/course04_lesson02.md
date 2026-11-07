@@ -116,7 +116,7 @@ For critical applications, the program should also check the affected-row count 
 
 ## 7. Practice Script Walkthrough
 
-`lesson02.sql` performs the following sequence:
+`course04_lesson02.sql` performs the following sequence:
 
 1. Confirms the connection and checks that practice IDs `4901`–`4903` are unused.
 2. Creates a savepoint and inserts three temporary books.
@@ -159,7 +159,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 In SQL*Plus:
 
 ```sql
-@course04_data_manipulation_and_transactions/lesson02_update_statements/lesson02.sql
+@course04_data_manipulation_and_transactions/lesson02_update_statements/course04_lesson02.sql
 ```
 
 Review `course04_data_manipulation_and_transactions/lesson02_update_statements/logs/lesson02.log`.

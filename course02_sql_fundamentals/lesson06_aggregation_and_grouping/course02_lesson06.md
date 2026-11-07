@@ -103,7 +103,7 @@ No additional setup is required.
 Run:
 
 ```text
-@lesson06.sql
+@course02_lesson06.sql
 ```
 
 ---

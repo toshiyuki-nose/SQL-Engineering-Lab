@@ -96,7 +96,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 Then run:
 
 ```sql
-@course05_advanced_sql_queries/lesson05_advanced_window_functions/lesson05.sql
+@course05_advanced_sql_queries/lesson05_advanced_window_functions/course05_lesson05.sql
 ```
 
 The script writes its log to:

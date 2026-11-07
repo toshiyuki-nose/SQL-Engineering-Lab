@@ -10,7 +10,7 @@ A hands-on SQL and database engineering learning project built around **Oracle D
 
 **SQL-Engineering-Lab** is a structured learning repository for practicing SQL through real database exercises.
 
-Rather than focusing on syntax alone, the project emphasizes writing, executing, verifying, and improving SQL in an Oracle environment. As the curriculum progresses, it will also cover database design, execution plans, and performance tuning.
+Rather than focusing on syntax alone, the project emphasizes writing, executing, verifying, and improving SQL in an Oracle environment. The curriculum also introduces relational database design and schema objects, with execution plans and performance tuning identified as potential future topics.
 
 The goal is simple:
 
@@ -20,18 +20,19 @@ The goal is simple:
 
 ## Learning Progress
 
-**Courses 01–05 are complete: 29 lessons in total.**
+**Courses 01–06 are complete: 35 lessons in total.**
 
 | Course | Subject | Lessons | Status |
 |---|---|---:|---|
-| [01](course01_oracle_environment/) | Oracle Environment | 5 | Complete |
-| [02](course02_sql_fundamentals/) | SQL Fundamentals | 6 | Complete |
-| [03](course03_multiple_tables_and_relationships/) | Multiple Tables and Relationships | 6 | Complete |
-| [04](course04_data_manipulation_and_transactions/) | Data Manipulation and Transactions | 6 | Complete |
-| [05](course05_advanced_sql_queries/) | Advanced SQL Queries | 6 | Complete |
-| 06 | Next course — scope to be defined | — | Planned |
+| [01](course01_oracle_environment/course01_README.md) | Oracle Environment | 5 | Complete |
+| [02](course02_sql_fundamentals/course02_README.md) | SQL Fundamentals | 6 | Complete |
+| [03](course03_multiple_tables_and_relationships/course03_README.md) | Multiple Tables and Relationships | 6 | Complete |
+| [04](course04_data_manipulation_and_transactions/course04_README.md) | Data Manipulation and Transactions | 6 | Complete |
+| [05](course05_advanced_sql_queries/course05_README.md) | Advanced SQL Queries | 6 | Complete |
+| [06](course06_database_design_and_schema_objects/course06_README.md) | Database Design and Schema Objects | 6 | Complete |
+| **Total** | | **35** | |
 
-The curriculum will continue to grow as new courses are designed and verified.
+The curriculum will continue to grow as new courses are designed and reviewed.
 
 ---
 
@@ -47,7 +48,7 @@ Establish an Oracle learning environment and understand its core components.
 - Users, schemas, and tablespaces
 - First database objects
 
-[Explore Course 01](course01_oracle_environment/)
+[Explore Course 01](course01_oracle_environment/course01_README.md)
 
 ### Course 02 — SQL Fundamentals
 
@@ -60,7 +61,7 @@ Build a foundation in querying and analyzing relational data.
 - SQL functions
 - Aggregation and grouping
 
-[Explore Course 02](course02_sql_fundamentals/)
+[Explore Course 02](course02_sql_fundamentals/course02_README.md)
 
 ### Course 03 — Multiple Tables and Relationships
 
@@ -73,7 +74,7 @@ Understand relationships and retrieve information across tables.
 - Multiple-table joins
 - Subqueries
 
-[Explore Course 03](course03_multiple_tables_and_relationships/)
+[Explore Course 03](course03_multiple_tables_and_relationships/course03_README.md)
 
 ### Course 04 — Data Manipulation and Transactions
 
@@ -86,7 +87,7 @@ Learn how to modify data while protecting consistency and integrity.
 - Transactions, COMMIT, and ROLLBACK
 - Data integrity and safe DML practices
 
-[Explore Course 04](course04_data_manipulation_and_transactions/)
+[Explore Course 04](course04_data_manipulation_and_transactions/course04_README.md)
 
 ### Course 05 — Advanced SQL Queries
 
@@ -99,7 +100,20 @@ Develop more expressive, maintainable SQL queries.
 - Advanced window functions
 - Query refactoring
 
-[Explore Course 05](course05_advanced_sql_queries/)
+[Explore Course 05](course05_advanced_sql_queries/course05_README.md)
+
+### Course 06 — Database Design and Schema Objects
+
+Design reliable relational structures and build reusable Oracle schema objects.
+
+- Relational database design and ER modeling
+- Database normalization (1NF, 2NF, 3NF)
+- Constraints and data integrity
+- Views
+- Sequences and identity columns
+- Indexes and schema design
+
+[Explore Course 06](course06_database_design_and_schema_objects/course06_README.md)
 
 ---
 
@@ -123,13 +137,13 @@ The Book Store Database includes four related tables:
 - **AUTHORS** — author records
 - **BOOK_AUTHORS** — relationships between books and authors
 
-For the verified schema inventory, tables, constraints, indexes, and environment checks, see [Oracle Environment](docs/oracle_environment.md).
+For the documented schema inventory, tables, constraints, indexes, and environment checks, see [Oracle Environment](docs/oracle_environment.md).
 
 ---
 
 ## Repository Structure
 
-The following tree highlights the established course directories and the environment documentation. It is not an exhaustive listing of every file.
+The following tree highlights the course directories and environment documentation. It is not an exhaustive listing of every file.
 
 ```text
 SQL-Engineering-Lab/
@@ -140,11 +154,22 @@ SQL-Engineering-Lab/
 ├── course03_multiple_tables_and_relationships/
 ├── course04_data_manipulation_and_transactions/
 ├── course05_advanced_sql_queries/
+├── course06_database_design_and_schema_objects/
 └── docs/
     └── oracle_environment.md
 ```
 
-Each completed course contains lesson materials and supporting SQL exercises. Lesson documentation follows the naming convention `courseNN_lessonNN.md`.
+Each course contains lesson documentation and supporting SQL exercises. Files follow a consistent naming convention:
+
+| File type | Naming convention |
+|---|---|
+| Lesson documentation | `courseNN_lessonNN.md` |
+| Main SQL exercise | `courseNN_lessonNN.sql` |
+| Setup script | `courseNN_lessonNN_setup.sql` |
+| Cleanup script | `courseNN_lessonNN_cleanup.sql` |
+| Role-specific SQL script | `courseNN_lessonNN_sys.sql` or `courseNN_lessonNN_user.sql` |
+
+`NN` represents the two-digit course or lesson number. Supporting scripts are included only where needed.
 
 ---
 
@@ -159,7 +184,7 @@ The exercises emphasize a repeatable, hands-on process:
 5. Compare alternative approaches where appropriate.
 6. Complete the exercises and review the engineering notes.
 
-As later courses introduce performance engineering, this workflow will expand to include execution-plan analysis and SQL tuning.
+As future courses introduce performance engineering, this workflow may expand to include execution-plan analysis and SQL tuning.
 
 ---
 
@@ -167,8 +192,6 @@ As later courses introduce performance engineering, this workflow will expand to
 
 Potential future topics include:
 
-- Relational database design and normalization
-- Views, sequences, and indexes
 - Execution plans and AUTOTRACE
 - Oracle Optimizer and optimizer statistics
 - SQL performance tuning
@@ -177,7 +200,7 @@ Potential future topics include:
 - Database security and operations
 - An end-to-end database engineering project
 
-These topics are **planned possibilities**, not completed course content. Course 06 and subsequent course structures will be defined as the project progresses.
+These topics are **planned possibilities**, not completed course content. Course 07 and subsequent course structures will be defined as the project progresses.
 
 ---
 

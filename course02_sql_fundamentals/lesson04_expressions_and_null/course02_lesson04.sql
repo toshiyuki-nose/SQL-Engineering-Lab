@@ -3,15 +3,15 @@
 SQL-Engineering-Lab
 
 Course 02 - SQL Fundamentals
-Lesson 02 - Filtering Rows
+Lesson 04 - Expressions and NULL
 
 File
 ----
-lesson02.sql
+course02_lesson04.sql
 
 Purpose
 -------
-Practice filtering rows using the WHERE clause.
+Practice SQL expressions and learn how SQL handles NULL values.
 
 Execute as:
 
@@ -19,19 +19,19 @@ Execute as:
 
 Prerequisite
 ------------
-Run setup.sql before this script.
+Complete Lesson 03 and run the Lesson 04 course02_lesson04_setup.sql once.
 
 Topics
 ------
-1. WHERE
-2. Comparison operators
-3. AND
-4. OR
-5. NOT
-6. BETWEEN
-7. IN
-8. LIKE
-9. Combined conditions
+1. Arithmetic expressions
+2. Expressions with columns
+3. Column aliases
+4. Character concatenation
+5. NULL
+6. IS NULL
+7. IS NOT NULL
+8. NULL in expressions
+9. WHERE + expressions + ORDER BY
 
 ==============================================================================
 */
@@ -39,19 +39,22 @@ Topics
 PROMPT
 PROMPT ============================================================
 PROMPT SQL-Engineering-Lab
-PROMPT Course 02 - Lesson 02
-PROMPT Filtering Rows
+PROMPT Course 02 - Lesson 04
+PROMPT Expressions and NULL
 PROMPT ============================================================
 PROMPT
 
 SET ECHO ON
 SET FEEDBACK ON
-SET LINESIZE 160
+SET LINESIZE 180
 SET PAGESIZE 100
 
 COLUMN TITLE FORMAT A30
+COLUMN SUBTITLE FORMAT A50
 COLUMN CATEGORY FORMAT A15
 COLUMN PRICE FORMAT 999999.99
+COLUMN INVENTORY_VALUE FORMAT 99999999.99
+COLUMN BOOK_DESCRIPTION FORMAT A60
 
 -------------------------------------------------------------------------------
 -- Step 1
@@ -73,7 +76,7 @@ FROM dual;
 
 -------------------------------------------------------------------------------
 -- Step 2
--- Inspect the complete dataset
+-- Inspect the evolved BOOKS table
 -------------------------------------------------------------------------------
 
 PROMPT
@@ -83,253 +86,285 @@ PROMPT
 SELECT
     book_id,
     title,
+    subtitle,
     category,
     price,
     stock,
     published_year
-FROM books;
+FROM books
+ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 3
--- Equality
+-- Basic arithmetic expression
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 3: CATEGORY = Technology ===
+PROMPT === Step 3: Arithmetic Expression ===
 PROMPT
 
 SELECT
     book_id,
     title,
-    category
+    price,
+    price * 1.10 AS price_with_tax
 FROM books
-WHERE category = 'Technology';
+ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 4
--- Not equal
+-- Calculate inventory value
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 4: CATEGORY <> Technology ===
+PROMPT === Step 4: PRICE * STOCK ===
 PROMPT
 
 SELECT
     book_id,
     title,
-    category
+    price,
+    stock,
+    price * stock AS inventory_value
 FROM books
-WHERE category <> 'Technology';
+ORDER BY inventory_value DESC;
 
 -------------------------------------------------------------------------------
 -- Step 5
--- Numeric comparisons
+-- Expressions do not change stored values
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 5A: PRICE >= 3000 ===
+PROMPT === Step 5: Stored Value vs Calculated Value ===
 PROMPT
 
 SELECT
+    book_id,
     title,
-    price
+    price,
+    price + 500 AS hypothetical_price
 FROM books
-WHERE price >= 3000;
+WHERE book_id IN (1001, 1002, 1003)
+ORDER BY book_id;
 
 PROMPT
-PROMPT === Step 5B: PRICE < 2000 ===
+PROMPT IMPORTANT:
+PROMPT The expression changes only the query result.
+PROMPT The stored PRICE value is not updated.
 PROMPT
-
-SELECT
-    title,
-    price
-FROM books
-WHERE price < 2000;
 
 -------------------------------------------------------------------------------
 -- Step 6
--- AND
+-- Character concatenation
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 6: AND ===
+PROMPT === Step 6: Concatenation ===
 PROMPT
 
 SELECT
-    title,
-    category,
-    price
+    book_id,
+    title || ' - ' || category AS book_description
 FROM books
-WHERE category = 'Technology'
-  AND price >= 3000;
+ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 7
--- OR
+-- Combine stored values into a display expression
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 7: OR ===
+PROMPT === Step 7: Build a Display Value ===
 PROMPT
 
 SELECT
-    title,
-    category
+    book_id,
+    title || ' (' || published_year || ')' AS book_description
 FROM books
-WHERE category = 'Technology'
-   OR category = 'Data Science';
+ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 8
--- NOT
+-- Inspect NULL values
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 8: NOT ===
+PROMPT === Step 8: Inspect SUBTITLE ===
 PROMPT
 
 SELECT
+    book_id,
     title,
-    category
+    subtitle
 FROM books
-WHERE NOT category = 'Technology';
+ORDER BY book_id;
+
+PROMPT
+PROMPT Some books have a SUBTITLE.
+PROMPT Other books contain NULL in SUBTITLE.
+PROMPT
 
 -------------------------------------------------------------------------------
 -- Step 9
--- BETWEEN
+-- Find NULL values
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 9: BETWEEN ===
+PROMPT === Step 9: IS NULL ===
 PROMPT
 
 SELECT
+    book_id,
     title,
-    published_year
+    subtitle
 FROM books
-WHERE published_year BETWEEN 2020 AND 2024;
+WHERE subtitle IS NULL
+ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 10
--- IN
+-- Find non-NULL values
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 10: IN ===
+PROMPT === Step 10: IS NOT NULL ===
 PROMPT
 
 SELECT
+    book_id,
     title,
-    category
+    subtitle
 FROM books
-WHERE category IN (
-    'Technology',
-    'Data Science',
-    'Business'
-);
+WHERE subtitle IS NOT NULL
+ORDER BY book_id;
 
 -------------------------------------------------------------------------------
 -- Step 11
--- LIKE
+-- Incorrect NULL comparison
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 11A: Titles Containing SQL ===
+PROMPT === Step 11: NULL Cannot Be Compared with = ===
 PROMPT
 
 SELECT
     book_id,
-    title
+    title,
+    subtitle
 FROM books
-WHERE title LIKE '%SQL%';
+WHERE subtitle = NULL;
 
 PROMPT
-PROMPT === Step 11B: Titles Starting with Data ===
+PROMPT The query returns no matching rows.
+PROMPT Use IS NULL instead of = NULL.
 PROMPT
-
-SELECT
-    book_id,
-    title
-FROM books
-WHERE title LIKE 'Data%';
 
 -------------------------------------------------------------------------------
 -- Step 12
--- Stock filtering
+-- NULL in arithmetic expressions
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 12A: Books in Stock ===
+PROMPT === Step 12: NULL in an Arithmetic Expression ===
 PROMPT
 
 SELECT
+    book_id,
     title,
-    stock
+    price,
+    NULL AS discount_amount,
+    price - NULL AS calculated_price
 FROM books
-WHERE stock > 0;
+WHERE book_id IN (1001, 1002, 1003)
+ORDER BY book_id;
 
 PROMPT
-PROMPT === Step 12B: Out-of-Stock Books ===
+PROMPT A calculation involving NULL normally produces NULL.
 PROMPT
-
-SELECT
-    title,
-    stock
-FROM books
-WHERE stock = 0;
 
 -------------------------------------------------------------------------------
 -- Step 13
--- Combined conditions
+-- NULL and concatenation in Oracle
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 13: Combined Conditions ===
+PROMPT === Step 13: NULL and Concatenation ===
 PROMPT
 
 SELECT
+    book_id,
     title,
-    category,
-    price,
-    stock
+    subtitle,
+    title || ' - ' || subtitle AS book_description
 FROM books
-WHERE category IN ('Technology', 'Data Science')
-  AND price <= 4000
-  AND stock > 0;
+ORDER BY book_id;
+
+PROMPT
+PROMPT IMPORTANT:
+PROMPT Oracle currently treats a zero-length character value as NULL.
+PROMPT In concatenation, a NULL character value does not necessarily make
+PROMPT the complete concatenated result NULL.
+PROMPT
 
 -------------------------------------------------------------------------------
 -- Step 14
--- Parentheses and logical conditions
+-- Combine filtering, expressions, and sorting
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 14: Parentheses ===
+PROMPT === Step 14: Filter + Expression + Sort ===
 PROMPT
 
 SELECT
+    book_id,
     title,
-    category,
-    stock
+    price,
+    stock,
+    price * stock AS inventory_value
 FROM books
-WHERE (
-        category = 'Technology'
-        OR category = 'Data Science'
-      )
-  AND stock > 0;
+WHERE stock > 0
+ORDER BY inventory_value DESC;
 
 -------------------------------------------------------------------------------
 -- Step 15
+-- Expressions with multiple conditions
+-------------------------------------------------------------------------------
+
+PROMPT
+PROMPT === Step 15: Technology and Data Science Inventory ===
+PROMPT
+
+SELECT
+    book_id,
+    title,
+    category,
+    price,
+    stock,
+    price * stock AS inventory_value
+FROM books
+WHERE category IN ('Technology', 'Data Science')
+  AND stock > 0
+ORDER BY
+    inventory_value DESC,
+    book_id ASC;
+
+-------------------------------------------------------------------------------
+-- Step 16
 -- Final business question
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === Step 15: Final Business Question ===
+PROMPT === Step 16: Final Business Question ===
 PROMPT
 
-PROMPT Find Technology or Data Science books:
-PROMPT   - published between 2020 and 2025
-PROMPT   - price <= 4000
-PROMPT   - stock > 0
+PROMPT The bookstore wants to review books that do not yet have a subtitle.
+PROMPT
+PROMPT Requirements:
+PROMPT   - SUBTITLE is missing
+PROMPT   - book is currently in stock
+PROMPT   - calculate PRICE * STOCK as INVENTORY_VALUE
+PROMPT   - show the highest inventory value first
+PROMPT   - use BOOK_ID as the final tie-breaker
 PROMPT
 
 SELECT
@@ -338,12 +373,13 @@ SELECT
     category,
     price,
     stock,
-    published_year
+    price * stock AS inventory_value
 FROM books
-WHERE category IN ('Technology', 'Data Science')
-  AND published_year BETWEEN 2020 AND 2025
-  AND price <= 4000
-  AND stock > 0;
+WHERE subtitle IS NULL
+  AND stock > 0
+ORDER BY
+    inventory_value DESC,
+    book_id ASC;
 
 -------------------------------------------------------------------------------
 -- Completion
@@ -351,18 +387,18 @@ WHERE category IN ('Technology', 'Data Science')
 
 PROMPT
 PROMPT ============================================================
-PROMPT Lesson 02 completed.
+PROMPT Lesson 04 completed.
 PROMPT
 PROMPT You practiced:
 PROMPT
-PROMPT   WHERE
-PROMPT   Comparison operators
-PROMPT   AND / OR / NOT
-PROMPT   BETWEEN
-PROMPT   IN
-PROMPT   LIKE
-PROMPT   Combined conditions
+PROMPT   Arithmetic expressions
+PROMPT   Column aliases
+PROMPT   Character concatenation
+PROMPT   NULL
+PROMPT   IS NULL / IS NOT NULL
+PROMPT   NULL in expressions
+PROMPT   WHERE + expressions + ORDER BY
 PROMPT
 PROMPT Next:
-PROMPT   Lesson 03 - Sorting Results
+PROMPT   Lesson 05 - SQL Functions
 PROMPT ============================================================

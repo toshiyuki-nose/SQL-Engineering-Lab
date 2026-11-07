@@ -43,7 +43,7 @@ sqlplus sql_lab@localhost:1521/FREEPDB1
 Example lesson execution (SQL*Plus):
 
 ```sql
-@course04_data_manipulation_and_transactions/lesson06_data_integrity_and_safe_dml_practices/lesson06.sql
+@course04_data_manipulation_and_transactions/lesson06_data_integrity_and_safe_dml_practices/course04_lesson06.sql
 ```
 
 ## Database safety and cleanup

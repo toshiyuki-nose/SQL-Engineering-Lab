@@ -7,7 +7,7 @@ Lesson 03 - INNER JOIN
 
 File
 ----
-lesson03.sql
+course03_lesson03.sql
 
 Purpose
 -------

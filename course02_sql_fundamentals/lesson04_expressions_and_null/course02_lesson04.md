@@ -133,7 +133,7 @@ The `BOOKS` table from Lesson 02 and Lesson 03 must already exist.
 Run:
 
 ```text
-@setup.sql
+@course02_lesson04_setup.sql
 ```
 
 once before starting the lesson.
@@ -148,7 +148,7 @@ The setup script:
 Then run:
 
 ```text
-@lesson04.sql
+@course02_lesson04.sql
 ```
 
 ---

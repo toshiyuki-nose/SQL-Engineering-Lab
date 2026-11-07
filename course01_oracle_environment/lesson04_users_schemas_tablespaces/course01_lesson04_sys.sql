@@ -7,24 +7,24 @@ Lesson 04 - Users, Schemas, and Tablespaces
 
 File
 ----
-lesson04_user.sql
+course01_lesson04_sys.sql
 
 Purpose
 -------
-Inspect the SQL_LAB environment from the user's perspective.
+Inspect the SQL_LAB environment from the SYS administrator perspective.
 
 Execute as:
 
-    SQL_LAB @ FREEPDB1
+    SYS @ FREEPDB1
 
 This script verifies:
 
 1. Current session
-2. User configuration
-3. Tablespace quota
-4. System privileges
-5. Granted roles
-6. Schema objects
+2. SQL_LAB user configuration
+3. SQL_LAB tablespace quota
+4. SQL_LAB system privileges
+5. SQL_LAB granted roles
+6. Objects owned by SQL_LAB
 
 ==============================================================================
 */
@@ -33,7 +33,7 @@ PROMPT
 PROMPT ============================================================
 PROMPT SQL-Engineering-Lab
 PROMPT Course 01 - Lesson 04
-PROMPT User Perspective
+PROMPT SYS Perspective
 PROMPT ============================================================
 PROMPT
 
@@ -60,79 +60,86 @@ FROM dual;
 
 -------------------------------------------------------------------------------
 -- Step 2
--- Inspect the current user
+-- Inspect SQL_LAB user configuration
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === My User Configuration ===
+PROMPT === SQL_LAB User Configuration ===
 PROMPT
 
 COLUMN USERNAME FORMAT A15
+COLUMN ACCOUNT_STATUS FORMAT A15
 COLUMN DEFAULT_TABLESPACE FORMAT A20
 COLUMN TEMPORARY_TABLESPACE FORMAT A20
 
 SELECT
     username,
+    account_status,
     default_tablespace,
     temporary_tablespace
-FROM user_users;
+FROM dba_users
+WHERE username = 'SQL_LAB';
 
 -------------------------------------------------------------------------------
 -- Step 3
--- Inspect the tablespace quota
+-- Inspect SQL_LAB tablespace quota
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === My Tablespace Quota ===
+PROMPT === SQL_LAB Tablespace Quota ===
 PROMPT
 
 COLUMN TABLESPACE_NAME FORMAT A20
 
 SELECT
     tablespace_name,
+    username,
     bytes,
     max_bytes
-FROM user_ts_quotas;
+FROM dba_ts_quotas
+WHERE username = 'SQL_LAB';
 
 -------------------------------------------------------------------------------
 -- Step 4
--- Inspect system privileges
+-- Inspect SQL_LAB system privileges
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === My System Privileges ===
+PROMPT === SQL_LAB System Privileges ===
 PROMPT
 
 COLUMN PRIVILEGE FORMAT A30
 
 SELECT
     privilege
-FROM user_sys_privs
+FROM dba_sys_privs
+WHERE grantee = 'SQL_LAB'
 ORDER BY privilege;
 
 -------------------------------------------------------------------------------
 -- Step 5
--- Inspect granted roles
+-- Inspect SQL_LAB granted roles
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === My Roles ===
+PROMPT === SQL_LAB Roles ===
 PROMPT
 
 COLUMN GRANTED_ROLE FORMAT A30
 
 SELECT
     granted_role
-FROM user_role_privs
+FROM dba_role_privs
+WHERE grantee = 'SQL_LAB'
 ORDER BY granted_role;
 
 -------------------------------------------------------------------------------
 -- Step 6
--- Inspect objects owned by the current schema
+-- Inspect objects owned by SQL_LAB
 -------------------------------------------------------------------------------
 
 PROMPT
-PROMPT === My Schema Objects ===
+PROMPT === SQL_LAB Schema Objects ===
 PROMPT
 
 COLUMN OBJECT_NAME FORMAT A30
@@ -141,7 +148,8 @@ COLUMN OBJECT_TYPE FORMAT A20
 SELECT
     object_name,
     object_type
-FROM user_objects
+FROM dba_objects
+WHERE owner = 'SQL_LAB'
 ORDER BY object_type, object_name;
 
 -------------------------------------------------------------------------------
@@ -152,19 +160,20 @@ PROMPT
 PROMPT ============================================================
 PROMPT Expected Environment
 PROMPT
-PROMPT User                : SQL_LAB
+PROMPT User                : SYS
 PROMPT Container           : FREEPDB1
-PROMPT Current Schema      : SQL_LAB
+PROMPT Target User         : SQL_LAB
+PROMPT Account Status      : OPEN
 PROMPT Default Tablespace  : FREEPDB1_DATA
 PROMPT Temporary Tablespace: TEMP
 PROMPT Tablespace Quota    : UNLIMITED (MAX_BYTES = -1)
 PROMPT
-PROMPT Expected System Privileges:
+PROMPT Expected SQL_LAB System Privileges:
 PROMPT   CREATE SEQUENCE
 PROMPT   CREATE SESSION
 PROMPT   CREATE TABLE
 PROMPT   CREATE VIEW
 PROMPT
-PROMPT Expected Roles:
+PROMPT Expected SQL_LAB Roles:
 PROMPT   None
 PROMPT ============================================================

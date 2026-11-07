@@ -7,7 +7,7 @@ Lesson 02 - Filtering Rows
 
 File
 ----
-setup.sql
+course02_lesson02_setup.sql
 
 Purpose
 -------
@@ -24,7 +24,7 @@ BOOKS is part of the growing SQL-Engineering-Lab Book Store Database.
 Normally, keep this table after completing Lesson 02 because later lessons
 will continue to use it.
 
-Use cleanup.sql only when you intentionally want to reset the dataset.
+Use course02_lesson02_cleanup.sql only when you intentionally want to reset the dataset.
 
 ==============================================================================
 */
@@ -71,8 +71,8 @@ PROMPT
 
 PROMPT
 PROMPT IMPORTANT:
-PROMPT setup.sql creates a new BOOKS table.
-PROMPT If BOOKS already exists, run cleanup.sql before running setup.sql again.
+PROMPT course02_lesson02_setup.sql creates a new BOOKS table.
+PROMPT If BOOKS already exists, run course02_lesson02_cleanup.sql before running course02_lesson02_setup.sql again.
 PROMPT
 
 
